@@ -1,14 +1,28 @@
 source "http://rubygems.org"
 
-# Declare your gem's dependencies in score.gemspec.
+# Declare your gem's dependencies in blog.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
 
-# Declare any dependencies that are still in development here instead of in
-# your gemspec. These might include edge Rails or gems from your path or
-# Git. Remember to move these dependencies to your gemspec before releasing
-# your gem to rubygems.org.
+source "http://rubygems.org"
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem "jquery-rails"
+gem "bson_ext"
+gem "bundler"
+gem "mongoid"
+gem "haml"
+gem "haml-rails"
+gem "carrierwave"
+gem "carrierwave-mongoid", require: "carrierwave/mongoid"
+
+
+group :development, :test do
+  gem "factory_girl_rails", '>= 1.2.0'
+  gem "mocha"
+  gem "rspec-rails"
+  # Autotest
+  gem 'autotest'
+  gem 'autotest-rails'
+  gem 'autotest-notification'
+end
