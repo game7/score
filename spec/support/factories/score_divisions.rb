@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :division, :class => Score::Division do |d|
-    d.name = "A Division"
+    d.name "A Division"
   end
 end

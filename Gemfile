@@ -21,6 +21,7 @@ group :development, :test do
   gem "factory_girl_rails", '>= 1.2.0'
   gem "mocha"
   gem "rspec-rails"
+  gem 'mongoid-rspec'
   # Autotest
   gem 'autotest'
   gem 'autotest-rails'

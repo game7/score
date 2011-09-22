@@ -1,5 +1,9 @@
 require 'spec_helper'
 
-describe Division do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Score::Division do
+
+  it { should have_fields(:name, :slug) }
+
+  it { should validate_presence_of(:name) }
+  
 end
