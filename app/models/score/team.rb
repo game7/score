@@ -23,11 +23,16 @@ module Score
     field :division_name, type: String
     field :division_slug, type: String
     before_save do |t|
-      if d = t.division
-        t.division_name = d.name
-        t.division_slug = d.slug
+      update_division_info(self.division) if division_id_changed?
+    end
+
+    def update_division_info(d)
+      unless d == nil
+        self.division_name = d.name
+        self.division_slug = d.slug
       else
-        t.division_name = t.division.slug = ""
+        self.division_name = ""
+        self.division_slug = ""
       end
     end
 
