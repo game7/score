@@ -18,7 +18,8 @@ gem "carrierwave-mongoid", require: "carrierwave/mongoid"
 
 
 group :development, :test do
-  gem "factory_girl_rails", '>= 1.2.0'
+  # gem "factory_girl_rails", '>= 1.2.0'
+  gem "fabrication"
   gem "mocha"
   gem "rspec-rails"
   gem 'mongoid-rspec'
@@ -27,3 +28,4 @@ group :development, :test do
   gem 'autotest-rails'
   gem 'autotest-notification'
 end
+
