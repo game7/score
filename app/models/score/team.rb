@@ -41,11 +41,16 @@ module Score
     field :season_name, type: String
     field :season_slug, type: String
     before_save do |t|
-      if s = t.season
-        t.season_name = s.name
-        t.season_slug = s.slug
+      update_season_info(self.season) if season_id_changed?
+    end
+
+    def update_season_info(s)
+      unless s == nil
+        self.season_name = s.name
+        self.season_slug = s.slug
       else
-        t.season_name = t.season.slug = ""
+        self.season_name = ""
+        self.season_slug = ""
       end
     end
 
