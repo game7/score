@@ -4,6 +4,8 @@
   <title>Score</title>
   <%= stylesheet_link_tag    "score/application" %>
   <%= javascript_include_tag "score/application" %>
+  <!--[if IE 6]><%= stylesheet_link_tag 'score/ie6' %><![endif]-->
+  <!--[if IE 7]><%= stylesheet_link_tag 'score/ie7' %><![endif]-->
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,3 +14,4 @@
 
 </body>
 </html>
+
