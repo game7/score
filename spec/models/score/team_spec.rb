@@ -8,6 +8,9 @@ describe Score::Team do
   it { should validate_presence_of(:short_name) }
   it { should validate_presence_of(:slug) }
 
+  # Association with a Club
+  it { should be_referenced_in(:club) }
+
   # Association with a Division
   it { should be_referenced_in(:division) }
   it { should have_fields(:division_name, :division_slug) }

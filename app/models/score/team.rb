@@ -18,6 +18,8 @@ module Score
       t.slug = t.name.parameterize
     end
 
+    referenced_in :club, class_name: "Score::Club"
+
     referenced_in :division, class_name: "Score::Division"
     validates :division_id, :presence => true
     field :division_name, type: String
