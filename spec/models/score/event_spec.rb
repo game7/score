@@ -31,7 +31,7 @@ describe Score::Event do
 
     it "should update the starts_on date/time for all day events to 12:00 AM" do
       now = DateTime.now
-      @event.starts_on = DateTime.now.utc
+      @event.starts_on = now
       @event.all_day = true
       @event.save
       @event.starts_on.should == now.change(:hour => 0).utc
@@ -39,7 +39,7 @@ describe Score::Event do
 
     it "should update the ends_on date/time for all day events to 12:00 AM of the next day" do
       now = DateTime.now
-      @event.starts_on = DateTime.now
+      @event.starts_on = now
       @event.all_day = true
       @event.save
       @event.ends_on.should == now.change(:hour => 0).change(:day => now.day + 1).utc
@@ -47,7 +47,7 @@ describe Score::Event do
 
     it "should update the duration all day events to 60*24 minutes" do
       now = DateTime.now
-      @event.starts_on = DateTime.now
+      @event.starts_on = now
       @event.all_day = true
       @event.save
       @event.duration.should == (60 * 24)
