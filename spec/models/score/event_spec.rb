@@ -58,7 +58,7 @@ describe Score::Event do
       @event.ends_on.should == @event.starts_on.advance(:minutes => @event.duration)
     end
 
-    it "should update the venue names" do
+    it "should update the venue name and short_name" do
       @event.save
       @event.venue_name.should == @event.venue.name
       @event.venue_short_name.should == @event.venue.short_name
