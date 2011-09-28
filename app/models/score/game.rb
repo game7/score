@@ -43,6 +43,24 @@ module Score
       id == left_team_id || id == right_team_id
     end
 
+    def opponent(team)
+      throw :team_not_present unless has_team?(team)
+      id = team.class == Team ? team.id : team
+      id == left_team_id ? right_team : left_team
+    end
+
+    def opponent_id(team)
+      throw :team_not_present unless has_team?(team)
+      id = team.class == Team ? team.id : team
+      id == left_team_id ? right_team_id : left_team_id
+    end
+
+    def opponent_name(team)
+      throw :team_not_present unless has_team?(team)
+      id = team.class == Team ? team.id : team
+      id == left_team_id ? right_name : left_name
+    end
+
   end
 end
 

@@ -57,6 +57,32 @@ module Score
       end
     end
 
+    before_save :cleanup_division_ids
+    def cleanup_division_ids
+      division_ids.collect! { |id| BSON::ObjectId(id.to_s) }
+      division_ids.uniq!
+    end
+
+    scope :in_the_past, :where => { :starts_on.lt => DateTime.now }
+    scope :in_the_future, :where => { :starts_on.gt => DateTime.now }
+    scope :from, lambda { |from| { :where => { :starts_on.gt => from } } }
+    scope :to, lambda { |to| { :where => { :starts_on.lt => to } } }
+    scope :between, lambda { |from, to| { :where => { :starts_on.gt => from, :starts_on.lt => to } } }
+    class << self
+      def for_team(t)
+        id = t.class == Team ? t.id : t
+        any_of( { :team_ids => t.id}, { :division_ids => t.division_id, :show_for_all_teams => true })
+      end
+      def for_season(s)
+        id = s.class == Season ? s.id : s
+        where(:season_id => id)
+      end
+      def for_division(d)
+        id = d.class == Division ? d.id : d
+        any_in( :division_ids => [id])
+      end
+    end
+
   end
 end
 

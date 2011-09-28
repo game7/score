@@ -72,5 +72,40 @@ describe Score::Game do
 
   end
 
+  context "when requesting the opponent of a team" do
+
+    before(:all) do
+      @game = Fabricate(:game)
+    end
+
+    it "should correctly return the opponent from the left" do
+      @game.opponent(@game.right_team).id.should == @game.left_team.id
+    end
+
+    it "should correctly return the opponent from the right" do
+      @game.opponent(@game.left_team).id.should == @game.right_team.id
+    end
+
+    it "should correctly return the opponent_id from the left" do
+      @game.opponent_id(@game.right_team).should == @game.left_team.id
+    end
+
+    it "should correctly return the opponent_id from the right" do
+      @game.opponent_id(@game.left_team).should == @game.right_team.id
+    end
+
+    it "should correctly return the opponent_name from the left" do
+      @game.opponent_name(@game.right_team).should == @game.left_team.name
+    end
+
+    it "should correctly return the opponent_name from the right" do
+      @game.opponent_name(@game.left_team).should == @game.right_team.name
+    end
+
+    it "should throw team_not_present if the team is not associated" do
+      lambda{@game.opponent(Fabricate.build(:team))}.should throw_symbol(:team_not_present)
+    end
+  end
+
 end
 

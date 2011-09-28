@@ -64,6 +64,24 @@ describe Score::Event do
       @event.venue_short_name.should == @event.venue.short_name
     end
 
+    it "should convert division_ids to BSON" do
+      id = BSON::ObjectId.new.to_s
+      @event.division_ids = []
+      @event.division_ids << id
+      @event.save
+      @event.division_ids[0].class.should == BSON::ObjectId
+    end
+
+    it "should contain only unique division_ids" do
+      id = BSON::ObjectId.new
+      @event.division_ids = []
+      @event.division_ids << id
+      @event.division_ids << id
+      @event.save
+      @event.division_ids.length.should == 1
+      @event.division_ids.include?(id) == true
+    end
+
   end
 
 end
