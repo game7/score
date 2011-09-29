@@ -4,6 +4,7 @@ Score::Engine.routes.draw do
     resources :divisions
     resources :seasons
     resources :clubs
+    resources :venues
   end
 
 end
