@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::SeasonsController do
+describe Score::Admin::SeasonsController do
 
   describe "GET 'index'" do
     it "should be successful" do
@@ -45,3 +45,4 @@ describe Admin::SeasonsController do
   end
 
 end
+

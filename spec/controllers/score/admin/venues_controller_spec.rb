@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::VenuesController do
+describe Score::Admin::VenuesController do
 
   describe "GET 'index'" do
     it "should be successful" do
@@ -24,3 +24,4 @@ describe Admin::VenuesController do
   end
 
 end
+

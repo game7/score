@@ -19,13 +19,10 @@ describe Score::Team do
   # Association with a Season
   it { should be_referenced_in(:season) }
   it { should have_fields(:season_name, :season_slug) }
-  it { should validate_presence_of(:season_id) }
 
   context "upon saving" do
     before(:all) do
-      @division = Fabricate(:division)
-      @season = Fabricate(:season)
-      @team = Fabricate.build(:team, :division => @division, :season => @season)
+      @team = Fabricate.build(:team, :division => Fabricate(:division))
       @team.save
     end
 
@@ -43,16 +40,20 @@ describe Score::Team do
       @team.slug.should == @team.name.parameterize
     end
     it "captures the division name" do
+      @team.errors.each{|e| puts e.to_s}
       @team.division_name.should == @team.division.name
     end
     it "captures the division_slug" do
       @team.division_slug.should == @team.division.slug
     end
-    it "captures the season_name" do
-      @team.season_name.should == @team.season.name
+    it "captures the season from its division" do
+      @team.season_id.should == @team.division.season_id
     end
-    it "captures the season_slug" do
-      @team.season_slug.should == @team.season.slug
+    it "captures the season_name from its division" do
+      @team.season_name.should == @team.division.season_name
+    end
+    it "captures the season_slug from its division" do
+      @team.season_slug.should == @team.division.season_slug
     end
   end
 

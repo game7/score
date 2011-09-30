@@ -12,6 +12,24 @@ module Score
       d.slug = d.name.parameterize
     end
 
+    referenced_in :season, class_name: "Score::Season"
+    validates :season_id, :presence => true
+    field :season_name, type: String
+    field :season_slug, type: String
+    before_save do |t|
+      update_season_info(self.season) if season_id_changed?
+    end
+
+    def update_season_info(s)
+      unless s == nil
+        self.season_name = s.name
+        self.season_slug = s.slug
+      else
+        self.season_name = ""
+        self.season_slug = ""
+      end
+    end
+
     references_many :teams, class_name: "Score::Team"
 
     scope :with_name, lambda { |name| where(:name => name) }

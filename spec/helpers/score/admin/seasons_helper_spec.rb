@@ -10,6 +10,7 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe Admin::SeasonsHelper do
+describe Score::Admin::SeasonsHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end
+

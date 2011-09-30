@@ -8,6 +8,9 @@ describe Score::Season do
 
   it { should validate_presence_of(:starts_on) }
 
+  # Association with teams
+  it { should have_many(:teams) }
+
   context "upon saving" do
     before(:all) do
       @season = Fabricate.build(:season)

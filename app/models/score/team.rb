@@ -24,6 +24,11 @@ module Score
     validates :division_id, :presence => true
     field :division_name, type: String
     field :division_slug, type: String
+
+    referenced_in :season, class_name: "Score::Season"
+    field :season_name, type: String
+    field :season_slug, type: String
+
     before_save do |t|
       update_division_info(self.division) if division_id_changed?
     end
@@ -32,25 +37,14 @@ module Score
       unless d == nil
         self.division_name = d.name
         self.division_slug = d.slug
-      else
-        self.division_name = ""
-        self.division_slug = ""
-      end
-    end
-
-    referenced_in :season, class_name: "Score::Season"
-    validates :season_id, :presence => true
-    field :season_name, type: String
-    field :season_slug, type: String
-    before_save do |t|
-      update_season_info(self.season) if season_id_changed?
-    end
-
-    def update_season_info(s)
-      unless s == nil
+        self.season_id = d.season_id
+        s = d.season
         self.season_name = s.name
         self.season_slug = s.slug
       else
+        self.division_name = ""
+        self.division_slug = ""
+        self.season_id = nil
         self.season_name = ""
         self.season_slug = ""
       end

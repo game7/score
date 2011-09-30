@@ -1,8 +1,9 @@
 Score::Engine.routes.draw do
 
   namespace :admin do
-    resources :divisions
-    resources :seasons
+    resources :seasons do
+      resources :divisions
+    end
     resources :clubs
     resources :venues
   end

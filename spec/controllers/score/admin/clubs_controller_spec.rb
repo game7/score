@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::ClubController do
+describe Score::Admin::ClubsController do
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -24,3 +24,4 @@ describe Admin::ClubController do
   end
 
 end
+

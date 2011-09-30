@@ -1,6 +1,6 @@
 module Score
   module Admin
-    class Admin::ClubsController < ApplicationController
+    class ClubsController < ApplicationController
 
       before_filter :find_club, :only => [:edit, :update, :destroy]
 

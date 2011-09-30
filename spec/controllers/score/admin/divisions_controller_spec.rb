@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::DivisionsController do
+describe Score::Admin::DivisionsController do
 
   describe "GET 'index'" do
     it "should be successful" do
@@ -45,3 +45,4 @@ describe Admin::DivisionsController do
   end
 
 end
+

@@ -3,6 +3,5 @@ Fabricator(:team, :class_name => Score::Team) do
   short_name "Team"
   show_in_standings true
   division
-  season
 end
 
