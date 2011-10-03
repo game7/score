@@ -11,9 +11,8 @@ module Score
       validates :starts_on, :presence => true
 
       scope :with_name, lambda { |name| where(:name => name) }
-      scope :with_slug, lambda { |slug| where(:slug => slug) }
 
-      references_many :teams, class_name: "Score::Team"
+      references_many :divisions, class_name: "Score::Division"
 
       class << self
         def most_recent

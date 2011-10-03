@@ -8,8 +8,8 @@ describe Score::Season do
 
   it { should validate_presence_of(:starts_on) }
 
-  # Association with teams
-  it { should have_many(:teams) }
+  # Association with divisions
+  it { should have_many(:divisions) }
 
   context "upon saving" do
     before(:all) do

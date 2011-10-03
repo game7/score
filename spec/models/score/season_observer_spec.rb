@@ -9,7 +9,7 @@ describe Score::SeasonObserver do
   describe "#after_save" do
 
     let(:season) { Fabricate(:season) }
-    let(:team) { Fabricate(:team, :season => season) }
+    let(:division) { Fabricate(:division, :season => season) }
 
     before do
       new_name = "New Season Name"
@@ -18,12 +18,12 @@ describe Score::SeasonObserver do
       observer.after_save(season)
     end
 
-    it "updates the season name for child teams" do
-      team.season_name.should == season.name
+    it "updates the season name for child divisions" do
+      division.season_name.should == season.name
     end
 
-    it "updates the season slug for child teams" do
-      team.season_slug.should == season.slug
+    it "updates the season slug for child divisions" do
+      division.season_slug.should == season.slug
     end
 
   end
