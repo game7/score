@@ -1,8 +1,8 @@
-= semantic_form_for [:admin, @division] do |f|
+= semantic_form_for [:admin, params[:action] == "edit" ? nil : @season, @division] do |f|
   = f.inputs do
     = f.input :name
   = f.buttons do
     = f.commit_button
     %li
-      = link_to 'Cancel', admin_divisions_path
+      = link_to 'Cancel', admin_season_divisions_path(@season)
 

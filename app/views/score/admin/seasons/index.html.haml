@@ -11,6 +11,7 @@
       %td #{season.starts_on}
       %td
         = link_to 'Edit', edit_admin_season_path(season)
+        = link_to 'Divisions', admin_season_divisions_path(season)
         = link_to 'Destroy', [:admin, season], :confirm => 'Are you sure?', :method => :delete
 %br/
 = link_to 'New Season', new_admin_season_path
