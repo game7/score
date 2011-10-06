@@ -6,7 +6,11 @@ module Score
       before_filter :find_season, :only => [:index, :new, :create, :edit, :update, :destroy]
       
       def index
-        @divisions = Score::Division.all
+        @divisions = @season.divisions.asc(:name)
+        respond_to do |format|
+          format.json { render :json => @divisions }
+          format.html
+        end    
       end
 
       def new

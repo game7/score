@@ -11,7 +11,7 @@ module Score
     field :slug, type: String
     validates :slug, :presence => true
 
-    field :show_in_standings, type: Boolean
+    field :show_in_standings, type: Boolean, default: true
 
     before_validation do |t|
       t.short_name ||= t.name
@@ -47,6 +47,13 @@ module Score
         self.season_id = nil
         self.season_name = ""
         self.season_slug = ""
+      end
+    end
+    
+    class << self
+      def for_season(season)
+        season_id = ( season.class == Season ? season.id : season )
+        where(:season_id => season_id)
       end
     end
 
