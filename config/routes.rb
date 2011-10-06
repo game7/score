@@ -7,6 +7,7 @@ Score::Engine.routes.draw do
     resources :clubs
     resources :venues
     resources :teams
+    resources :events
   end
 
 end

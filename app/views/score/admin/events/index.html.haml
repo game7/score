@@ -1,0 +1,24 @@
+%h1 Events
+
+Season: #{select("season", :id, @season_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
+%table
+  %tr
+    %th Date
+    %th Time
+    %th Summary
+    %th Actions
+  - @events.each do |event|
+    %tr
+      %td #{event.starts_on.strftime('%D')}
+      %td 
+        - if event.all_day
+          All Day
+        - else
+          = "#{event.starts_on.strftime('%l:%M %P')} - #{event.ends_on.strftime('%l:%M %P')}"
+      %td #{event.summary}
+      %td
+        = link_to 'Edit', edit_admin_event_path(event)
+        = link_to 'Destroy', [:admin, event], :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Event', new_admin_event_path
+
