@@ -1,13 +1,6 @@
 require 'spec_helper'
 
-describe Score::Admin::EventsController do
-
-  describe "GET 'index'" do
-    it "should be successful" do
-      get 'index'
-      response.should be_success
-    end
-  end
+describe Score::Admin::GamesController do
 
   describe "GET 'new'" do
     it "should be successful" do

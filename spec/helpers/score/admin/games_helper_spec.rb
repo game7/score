@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 # Specs in this file have access to a helper object that includes
-# the Admin::EventsHelper. For example:
+# the Admin::GamesHelper. For example:
 #
-# describe Admin::EventsHelper do
+# describe Admin::GamesHelper do
 #   describe "string concat" do
 #     it "concats two strings with spaces" do
 #       helper.concat_strings("this","that").should == "this that"
 #     end
 #   end
 # end
-describe Score::Admin::EventsHelper do
+describe Score::Admin::GamesHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

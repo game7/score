@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::TeamsController do
+describe Score::Admin::TeamsController do
 
   describe "GET 'index'" do
     it "should be successful" do

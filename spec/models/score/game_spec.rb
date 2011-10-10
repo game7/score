@@ -49,6 +49,11 @@ describe Score::Game do
       @game.save
       @game.division_ids.index(@game.right_team.division_id).should_not == nil
     end
+    
+    it "should update the summary to contain the team names" do
+      @game.save
+      @game.summary.should == "#{@game.left_name} vs. #{@game.right_name}"
+    end
 
   end
 

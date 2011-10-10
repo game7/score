@@ -10,6 +10,10 @@ module Score
       
       def index
         @teams = Score::Team.for_season(@season)
+          respond_to do |format|
+            format.json { render :json => @teams }
+            format.html
+          end
       end
 
       def show

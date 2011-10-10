@@ -31,6 +31,8 @@ module Score
         self.left_name = '' unless left_custom_name
       end
     end
+    
+    before_validation :update_summary
 
     field :completed_in, type: String
     COMPLETED_IN = %w[regulation overtime shootout forfeit]
@@ -60,6 +62,12 @@ module Score
       id = team.class == Team ? team.id : team
       id == left_team_id ? right_name : left_name
     end
+    
+    private
+    
+      def update_summary
+        self.summary = "#{self.left_name} vs. #{self.right_name}"
+      end
 
   end
 end

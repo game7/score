@@ -1,11 +1,12 @@
 = javascript_include_tag :defaults
 = semantic_form_for [:admin, @event] do |f|
-  = f.inputs do
+  = f.inputs "Logistics" do
     = f.input :season_id, :collection => @seasons
     = f.input :starts_on, :as => :string, :input_html => { :value => @event.starts_on ? @event.starts_on.strftime('%D %l:%M %P') : "" }
     = f.input :duration
     = f.input :all_day, :as => :boolean
     = f.input :venue_id, :collection => @venues
+  = f.inputs "Details"
     = f.input :summary
     = f.input :description, :as => :text, :input_html => { :rows => 4 }
 

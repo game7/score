@@ -17,8 +17,9 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
           = "#{event.starts_on.strftime('%l:%M %P')} - #{event.ends_on.strftime('%l:%M %P')}"
       %td #{event.summary}
       %td
-        = link_to 'Edit', edit_admin_event_path(event)
+        = link_to 'Edit', edit_polymorphic_path([:admin, event])
         = link_to 'Destroy', [:admin, event], :confirm => 'Are you sure?', :method => :delete
 %br/
 = link_to 'New Event', new_admin_event_path
+= link_to 'New Game', new_admin_game_path
 
