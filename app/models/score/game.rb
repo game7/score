@@ -4,12 +4,12 @@ module Score
 
     referenced_in :left_team, :class_name => 'Score::Team'
     field :left_name, type: String
-    field :left_custom_name, type: String
+    field :left_custom_name, type: Boolean
     field :left_score, type: Integer, default: 0
     validates :left_score, numericality: true
     before_validation do |g|
-      if t = self.right_team
-        self.right_name = t.name unless right_custom_name
+      if t = self.left_team
+        self.left_name = t.name unless left_custom_name
         team_ids << t.id
         division_ids << t.division_id unless division_ids.include?(t.division_id)
       else
@@ -19,16 +19,16 @@ module Score
 
     referenced_in :right_team, :class_name => 'Score::Team'
     field :right_name, type: String
-    field :right_custom_name, type: String
+    field :right_custom_name, type: Boolean
     field :right_score, type: Integer, default: 0
     validates :right_score, numericality: true
     before_validation do |g|
-      if t = self.left_team
-        self.left_name = t.name unless left_custom_name
+      if t = self.right_team
+        self.right_name = t.name unless right_custom_name
         team_ids << t.id
         division_ids << t.division_id unless division_ids.include?(t.division_id)
       else
-        self.left_name = '' unless left_custom_name
+        self.right = '' unless right_custom_name
       end
     end
     
