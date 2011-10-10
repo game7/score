@@ -5,7 +5,6 @@ module Score
       season = division.season
       division.teams.each do |t|
         t.update_division_info(division)
-        t.update_season_info(season)
         t.save
       end
     end
