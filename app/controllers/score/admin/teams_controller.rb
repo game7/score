@@ -55,7 +55,7 @@ module Score
       private
       
         def find_season
-          @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Admin::Season.most_recent
+          @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Score::Season.most_recent
         end
       
         def find_team
