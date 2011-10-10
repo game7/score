@@ -47,6 +47,8 @@ module Dummy
       g.orm             :mongoid
       g.template_engine :haml
     end
+    
+    config.active_record.observers = 'score/division_observer', 'score/season_observer'
 
   end
 end
