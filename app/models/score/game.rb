@@ -1,6 +1,8 @@
 module Score
   class Game < Score::Event
     include Mongoid::Document
+    
+    embeds_one :result, :class_name => 'Score::GameResult'
 
     referenced_in :left_team, :class_name => 'Score::Team'
     field :left_name, type: String
@@ -61,6 +63,10 @@ module Score
       throw :team_not_present unless has_team?(team)
       id = team.class == Team ? team.id : team
       id == left_team_id ? right_name : left_name
+    end
+    
+    def has_result?
+      result != nil
     end
     
     private

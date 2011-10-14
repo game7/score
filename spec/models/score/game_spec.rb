@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Score::Game do
+  
+  it { should embed_one(:result).of_type(Score::GameResult)}
 
   it { should be_referenced_in(:left_team).of_type(Score::Team) }
   it { should have_fields(:left_name, :left_custom_name, :left_score) }
@@ -9,6 +11,13 @@ describe Score::Game do
   it { should be_referenced_in(:right_team).of_type(Score::Team) }
   it { should have_fields(:right_name, :right_custom_name, :right_score) }
   it { should validate_numericality_of(:right_score) }
+  
+  it "should indicate whether a result has been posted" do
+    @game = Fabricate.build(:game)
+    @game.has_result?.should == false
+    @game.result = Fabricate.build(:game_result)
+    @game.has_result?.should == true
+  end
 
   context "when saving" do
 
