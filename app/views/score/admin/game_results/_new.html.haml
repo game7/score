@@ -1,0 +1,6 @@
+= semantic_form_for [:admin, @game, @game_result] do |f|
+  = f.inputs do
+    = f.input :left_score
+    = f.input :right_score
+    = f.input :completed_in, :collection => Score::Game.completed_in_options
+
