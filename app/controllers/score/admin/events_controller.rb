@@ -5,7 +5,8 @@ module Score
       before_filter :find_event, :only => [:edit, :update, :destroy]
       before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_venues, :only => [:new, :create, :edit, :update]
-      before_filter :get_season_links, :only => [:index]      
+      before_filter :get_season_links, :only => [:index] 
+      
       
       def index
         @events = Score::Event.all

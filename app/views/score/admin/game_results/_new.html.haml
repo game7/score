@@ -1,4 +1,4 @@
-= semantic_form_for [:admin, @game, @game_result] do |f|
+= semantic_form_for( @game_result, :url => admin_game_game_result_path(@game.id), :remote => true ) do |f|
   = f.inputs do
     = f.input :left_score
     = f.input :right_score

@@ -7,18 +7,8 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
     %th Time
     %th Summary
     %th Actions
-  - @events.each do |event|
-    %tr
-      %td #{event.starts_on.strftime('%D')}
-      %td 
-        - if event.all_day
-          All Day
-        - else
-          = "#{event.starts_on.strftime('%l:%M %P')} - #{event.ends_on.strftime('%l:%M %P')}"
-      %td #{event.summary}
-      %td
-        = link_to 'Edit', edit_polymorphic_path([:admin, event])
-        = link_to 'Destroy', [:admin, event], :confirm => 'Are you sure?', :method => :delete
+  = render :partial => 'event', :collection => @events
+
 %br/
 = link_to 'New Event', new_admin_event_path
 = link_to 'New Game', new_admin_game_path
