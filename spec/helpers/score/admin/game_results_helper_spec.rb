@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe Admin::GameResultsHelper do
+describe Score::Admin::GameResultsHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

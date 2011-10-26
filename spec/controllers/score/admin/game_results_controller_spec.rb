@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::GameResultsController do
+describe Score::Admin::GameResultsController do
 
   describe "GET 'new'" do
     it "should be successful" do

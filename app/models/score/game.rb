@@ -43,26 +43,40 @@ module Score
     end
 
     def has_team?(team)
-      id = team.class == Score::Team ? team.id : team
-      id == left_team_id || id == right_team_id
+      is_left_team?(team) || is_right_team?(team)
+    end
+    
+    def is_left_team?(team)
+      team_id_for(team) == left_team_id
+    end
+    
+    def is_right_team?(team)
+      team_id_for(team) == right_team_id
     end
 
     def opponent(team)
       throw :team_not_present unless has_team?(team)
-      id = team.class == Team ? team.id : team
-      id == left_team_id ? right_team : left_team
+      is_left_team?(team) ? right_team : left_team
     end
 
     def opponent_id(team)
       throw :team_not_present unless has_team?(team)
-      id = team.class == Team ? team.id : team
-      id == left_team_id ? right_team_id : left_team_id
+      is_left_team?(team) ? right_team_id : left_team_id
     end
 
     def opponent_name(team)
       throw :team_not_present unless has_team?(team)
-      id = team.class == Team ? team.id : team
-      id == left_team_id ? right_name : left_name
+      is_left_team?(team) ? right_name : left_name
+    end
+    
+    def team_score(team)
+      throw :team_not_present unless has_team?(team)
+      is_left_team?(team) ? left_score : right_score   
+    end
+    
+    def opponent_score(team)
+      throw :team_not_present unless has_team?(team)
+      is_left_team?(team) ? right_score : left_score      
     end
     
     def has_result?
@@ -70,6 +84,10 @@ module Score
     end
     
     private
+    
+      def team_id_for(team)
+        team.class == Score::Team ? team.id : team
+      end
     
       def update_summary
         self.summary = "#{self.left_name} vs. #{self.right_name}"
