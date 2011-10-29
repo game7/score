@@ -6,5 +6,10 @@
  *= require_tree .
  *= require formtastic
  *= require my_formtastic_changes
+ *= require jquery-ui
 */
+
+#dialog-modal {
+	background-color: #fff;
+}
 
