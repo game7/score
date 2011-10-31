@@ -9,7 +9,7 @@ module Score
   
     def create
       @game_result = @game.build_result(params[:game_result])
-      flash[:notice] = "Result has been created" if @game_result.save
+      flash[:notice] = "Result has been created" if @game.save
     end
   
     def destroy

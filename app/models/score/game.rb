@@ -34,6 +34,7 @@ module Score
       end
     end
     
+    before_validation :update_scores
     before_validation :update_summary
 
     field :completed_in, type: String
@@ -79,6 +80,22 @@ module Score
       is_left_team?(team) ? right_score : left_score      
     end
     
+    def winning_name
+      left_score >= right_score ? left_name : right_name
+    end
+    
+    def winning_score
+      left_score >= right_score ? left_score : right_score
+    end
+    
+    def losing_name
+      left_score >= right_score ? right_name : left_name
+    end
+    
+    def losing_score
+      left_score >= right_score ? right_score : left_score
+    end
+    
     def has_result?
       result != nil
     end
@@ -88,9 +105,24 @@ module Score
       def team_id_for(team)
         team.class == Score::Team ? team.id : team
       end
+      
+      def update_scores
+        if has_result?
+          self.left_score = result.left_score
+          self.right_score = result.right_score
+        end
+      end
     
       def update_summary
-        self.summary = "#{self.left_name} vs. #{self.right_name}"
+        self.summary = has_result? ? build_summary_with_result : build_summary
+      end
+      
+      def build_summary
+        "#{self.left_name} vs. #{self.right_name}"
+      end
+      
+      def build_summary_with_result
+        "#{winning_name} #{winning_score}, #{losing_name} #{losing_score}"
       end
 
   end

@@ -1,4 +1,3 @@
-alert('to do: pull in jquery UI and add modal to template');
 $('#dialog-modal').html("<%= escape_javascript( render(:partial => "new" ) ) %>");
 $('#dialog-modal').dialog({
 	title: 'Add Game Result',
@@ -6,7 +5,7 @@ $('#dialog-modal').dialog({
 	width: 500,
 	modal: true,
 	buttons: {
-		Seave: function() {
+		Save: function() {
 			$(this).children("form").submit();
 		},
 		Cancel: function() {

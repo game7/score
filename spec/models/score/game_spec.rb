@@ -63,6 +63,13 @@ describe Score::Game do
       @game.save
       @game.summary.should == "#{@game.left_name} vs. #{@game.right_name}"
     end
+    
+    it "should update the scores when a game_result is present" do
+      @game.result = Fabricate.build(:game_result)
+      @game.save
+      @game.left_score.should == @game.result.left_score
+      @game.right_score.should == @game.result.right_score
+    end
 
   end
 

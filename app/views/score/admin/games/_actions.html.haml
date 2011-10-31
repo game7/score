@@ -1,1 +1,1 @@
-= link_to 'Post Result', new_admin_game_game_result_path(game), :remote => true
+= link_to 'Post Result', new_admin_game_game_result_path(game), :remote => true unless game.has_result?
