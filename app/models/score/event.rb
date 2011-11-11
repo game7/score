@@ -39,11 +39,11 @@ module Score
       division_ids.uniq!
     end
 
-    scope :in_the_past, :where => { :starts_on.lt => DateTime.now }
-    scope :in_the_future, :where => { :starts_on.gt => DateTime.now }
-    scope :from, lambda { |from| { :where => { :starts_on.gt => from } } }
-    scope :to, lambda { |to| { :where => { :starts_on.lt => to } } }
-    scope :between, lambda { |from, to| { :where => { :starts_on.gt => from, :starts_on.lt => to } } }
+    scope :in_the_past, :where => { :starts.lt => DateTime.now }
+    scope :in_the_future, :where => { :ends.gt => DateTime.now }
+    scope :from, lambda { |from| { :where => { :starts.gt => from } } }
+    scope :to, lambda { |to| { :where => { :starts.lt => to } } }
+    scope :between, lambda { |from, to| { :where => { :starts.gt => from, :starts.lt => to } } }
     class << self
       def for_team(t)
         id = t.class == Team ? t.id : t

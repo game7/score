@@ -14,6 +14,9 @@ module Score
   
       def new
         @event = Score::Event.new
+        # default values
+        @event.season_id = @seasons[0].id if @seasons.count == 1
+        @event.venue_id = @venues[0].id if @venues.count == 1        
       end
       
       def create

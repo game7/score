@@ -3,7 +3,7 @@
   = f.inputs "Logistics" do
     = f.input :season_id, :collection => @seasons
     = hidden_field_tag 'teams_path', admin_teams_path(:season_id => '_season_id' , :format => 'json')
-    = f.input :starts_on, :as => :string, :input_html => { :value => @game.starts_on ? @game.starts_on.strftime('%D %l:%M %P') : "" }
+    = f.input :starts, :as => :string, :input_html => { :value => @game.starts ? @game.starts.strftime('%D %l:%M %P') : "" }
     = f.input :duration
     = f.input :venue_id, :collection => @venues
   = f.inputs "Left Team" do

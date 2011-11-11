@@ -33,7 +33,7 @@ module Score
       team_id = team.class == Score::Team ? team.id : team
     
       self.game_id = game.id
-      self.played_on = game.starts_on.to_date
+      self.played_on = game.starts.to_date
       self.completed_in = game.completed_in
     
       self.opponent_id = game.opponent_id(team)
