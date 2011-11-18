@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Score::HockeyEvent do
+describe Score::HockeyGame do
 
   it { should be_referenced_in(:home_team).of_type(Score::Team) }
   it { should have_fields(:home_team_name, :home_custom_name) }
@@ -11,26 +11,26 @@ describe Score::HockeyEvent do
   context "when saving" do
 
     before(:all) do
-      @event = Fabricate.build(:hockey_event)
+      @game = Fabricate.build(:hockey_game)
     end
 
     it "should be valid" do
-      @event.valid?.should == true
+      @game.valid?.should == true
     end
 
     it "should update the home team name" do
-      @event.save
-      @event.home_team_name.should == @event.home_team.name
+      @game.save
+      @game.home_team_name.should == @game.home_team.name
     end
 
     it "should update the away team name" do
-      @event.save
-      @event.away_team_name.should == @event.away_team.name
+      @game.save
+      @game.away_team_name.should == @game.away_team.name
     end
     
     it "should update the summary to contain the team names" do
-      @event.save
-      @event.summary.should == "#{@event.away_team_name} at #{@event.home_team_name}"
+      @game.save
+      @game.summary.should == "#{@game.away_team_name} at #{@game.home_team_name}"
     end    
 
   end  

@@ -11,6 +11,7 @@ Score::Engine.routes.draw do
     resources :games, :only => [ :new, :create ], :shallow => true do
       resource :game_result, :only => [ :new, :create, :destroy ]
     end
+    resources :hockey_games, :only => [ :new, :create, :edit, :update ]
   end
 
 end

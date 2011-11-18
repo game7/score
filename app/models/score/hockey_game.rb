@@ -1,5 +1,5 @@
 module Score
-  class HockeyEvent < Score::Event
+  class HockeyGame < Score::Event
     include Mongoid::Document
     
     before_validation :set_home_team_name
