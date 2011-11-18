@@ -7,9 +7,7 @@ Score::Engine.routes.draw do
     resources :clubs
     resources :venues
     resources :teams
-    resources :events, :only => [ :index, :new, :create, :destroy] do
-      resources :reschedules, :only => [ :new, :create ]
-    end
+    resources :events
     resources :games, :only => [ :new, :create ], :shallow => true do
       resource :game_result, :only => [ :new, :create, :destroy ]
     end

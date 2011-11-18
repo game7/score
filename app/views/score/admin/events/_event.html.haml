@@ -1,13 +1,9 @@
 %tr
   %td #{event.starts.strftime('%D')}
-  %td 
-    - if event.all_day?
-      All Day
-    - else
-      = "#{event.starts.strftime('%l:%M %P')} - #{event.ends.strftime('%l:%M %P')}"
+  %td #{event.starts.strftime('%l:%M %P')}
   %td #{event.summary}
   %td
-    = link_to 'Reschedule', new_admin_event_reschedule_path(event.id)
+    = link_to 'Edit', edit_admin_event_path(event.id)
     = link_to 'Delete', [:admin, event], :confirm => 'Are you sure?', :method => :delete
     - if event.class == Score::Game
       = render :partial => 'score/admin/games/actions', :locals => { :game => event }

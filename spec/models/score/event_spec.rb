@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Score::Event do
 
-  it { should have_fields(:summary, :description, :venue_name, :venue_short_name) }
+  it { should have_fields(:starts, :duration, :summary, :description, :venue_name, :venue_short_name) }
   it { should have_field(:division_ids).of_type(Array) }
   it { should have_field(:team_ids).of_type(Array) }
 
@@ -10,6 +10,9 @@ describe Score::Event do
 
   context "when validating" do
 
+    it { Score::Event.should validate_presence_of(:starts) }
+    it { Score::Event.should validate_presence_of(:duration) }
+    it { Score::Event.should validate_numericality_of(:duration) }    
     it { should validate_presence_of(:summary) }
     it { should validate_presence_of(:season_id) }
 

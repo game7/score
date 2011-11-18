@@ -1,7 +1,12 @@
 module Score
   class Event
     include Mongoid::Document
-    include Score::Models::Schedulable
+    
+    field :starts, type: Time
+    field :duration, type: Integer
+            
+    validates :starts, :presence => true
+    validates :duration, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }    
 
     field :summary, type: String
     validates :summary, :presence => true
