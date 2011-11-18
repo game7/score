@@ -4,6 +4,6 @@
   %td #{event.summary}
   %td
     = link_to 'Edit', edit_admin_event_path(event.id)
-    = link_to 'Delete', [:admin, event], :confirm => 'Are you sure?', :method => :delete
+    = link_to 'Delete', admin_event_path(event), :confirm => 'Are you sure?', :method => :delete
     - if event.class == Score::Game
       = render :partial => 'score/admin/games/actions', :locals => { :game => event }
