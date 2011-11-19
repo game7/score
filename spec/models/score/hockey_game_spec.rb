@@ -4,9 +4,14 @@ describe Score::HockeyGame do
 
   it { should be_referenced_in(:home_team).of_type(Score::Team) }
   it { should have_fields(:home_team_name, :home_custom_name) }
+  it { should be_referenced_in(:home_division).of_type(Score::Division) }
+  it { should have_fields(:home_division_name) }
+  
 
   it { should be_referenced_in(:away_team).of_type(Score::Team) }
   it { should have_fields(:away_team_name, :away_custom_name) }
+  it { should be_referenced_in(:away_division).of_type(Score::Division) }
+  it { should have_fields(:away_division_name) }
   
   context "when saving" do
 
@@ -27,6 +32,16 @@ describe Score::HockeyGame do
       @game.save
       @game.away_team_name.should == @game.away_team.name
     end
+    
+    it "should update the home division name" do
+      @game.save
+      @game.home_division_name.should == @game.home_division.name
+    end
+
+    it "should update the away division name" do
+      @game.save
+      @game.away_division_name.should == @game.away_division.name
+    end    
     
     it "should update the summary to contain the team names" do
       @game.save

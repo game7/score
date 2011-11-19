@@ -3,13 +3,19 @@ module Score
     include Mongoid::Document
     
     before_validation :set_home_team_name
+    before_validation :set_home_division_name
     before_validation :set_away_team_name
+    before_validation :set_away_division_name
     before_validation :set_summary_to_show_team_matchup
 
+    referenced_in :home_division, :class_name => 'Score::Division'
+    field :home_division_name, type: String
     referenced_in :home_team, :class_name => 'Score::Team'
     field :home_team_name, type: String
     field :home_custom_name, type: Boolean
 
+    referenced_in :away_division, :class_name => 'Score::Division'
+    field :away_division_name, type: String
     referenced_in :away_team, :class_name => 'Score::Team'
     field :away_team_name, type: String
     field :away_custom_name, type: Boolean
@@ -24,6 +30,14 @@ module Score
         end        
       end
       
+      def set_home_division_name
+        if d = self.home_division
+          self.home_division_name = d.name
+        else
+          self.home_division_name = ''
+        end
+      end
+      
       def set_away_team_name
         if t = self.away_team
           self.away_team_name = t.name unless away_custom_name
@@ -31,6 +45,14 @@ module Score
           self.away_team_name = '' unless away_custom_name
         end        
       end
+      
+      def set_away_division_name
+        if d = self.away_division
+          self.away_division_name = d.name
+        else
+          self.away_division_name = ''
+        end
+      end      
       
       def set_summary_to_show_team_matchup
         self.summary = "#{self.away_team_name} at #{self.home_team_name}"
