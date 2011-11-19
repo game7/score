@@ -6,11 +6,17 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
     %th Date
     %th Time
     %th Summary
+    %th Venue
     %th Actions
-  = render :partial => 'event', :collection => @events
+  %tr
+    - @events.each do |event|
+      %td #{ event.starts.strftime('%D') }
+      %td #{ event.starts.strftime('%l:%M %P') }
+      %td #{ event.summary }
+      %td #{ event.venue_name }
+      %td #{ render_actions_for event }
 
 %br/
-= link_to 'New Event', new_admin_event_path
-= link_to 'New Game', new_admin_game_path
+= link_to 'New Hockey Game', new_admin_hockey_game_path
 #dialog-modal
 
