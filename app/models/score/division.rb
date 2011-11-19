@@ -34,6 +34,13 @@ module Score
 
     scope :with_name, lambda { |name| where(:name => name) }
     scope :with_slug, lambda { |slug| where(:slug => slug) }
+    
+    class << self
+      def for_season(season)
+        season_id = ( season.class == Season ? season.id : season )
+        where(:season_id => season_id)
+      end
+    end    
 
   end
 end

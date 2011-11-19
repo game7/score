@@ -2,16 +2,19 @@
 = semantic_form_for [:admin, @game] do |f|
   = f.inputs "Logistics" do
     = f.input :season_id, :collection => @seasons
-    = hidden_field_tag 'teams_path', admin_teams_path(:season_id => '_season_id' , :format => 'json')
+    = hidden_field_tag 'divisions_path', admin_season_divisions_path(:season_id => '_season_id' , :format => 'json')
+    = hidden_field_tag 'teams_path', admin_teams_path(:season_id => '_season_id', :divsion_id => '_division_id' , :format => 'json')
     = f.input :starts
     = f.input :duration
     = f.input :venue_id, :collection => @venues
   = f.inputs "Away Team" do
-    = f.input :away_team_id, :collection => @teams
+    = f.input :away_division_id, :collection => @divisions
+    = f.input :away_team_id, :collection => @away_division_teams
     = f.input :away_custom_name, :as => :boolean
     = f.input :away_team_name
   = f.inputs "Home Team" do
-    = f.input :home_team_id, :collection => @teams
+    = f.input :home_division_id, :collection => @divisions    
+    = f.input :home_team_id, :collection => @home_division_teams
     = f.input :home_custom_name, :as => :boolean
     = f.input :home_team_name
   = f.buttons do

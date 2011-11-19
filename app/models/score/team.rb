@@ -55,6 +55,10 @@ module Score
         season_id = ( season.class == Season ? season.id : season )
         where(:season_id => season_id)
       end
+      def for_division(division)
+        division_id = ( division.class == Division ? division.id : division )
+        where(:division_id => division_id)
+      end
     end
 
   end

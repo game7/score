@@ -10,10 +10,11 @@ module Score
       
       def index
         @teams = Score::Team.for_season(@season)
-          respond_to do |format|
-            format.json { render :json => @teams }
-            format.html
-          end
+        @teams = @teams.for_division(params[:division_id]) if params[:division_id]
+        respond_to do |format|
+          format.json { render :json => @teams }
+          format.html
+        end
       end
 
       def show
