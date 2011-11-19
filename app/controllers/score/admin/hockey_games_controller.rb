@@ -12,7 +12,7 @@ module Score
     end
   
     def create
-      @game = Score::HockeyEvent.new(params[:hockey_game])
+      @game = Score::HockeyGame.new(params[:hockey_game])
       if @game.save
         flash[:notice] = "New Hockey Game has been created"
         redirect_to admin_events_path
