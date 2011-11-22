@@ -21,3 +21,7 @@ table, th, td {
 	background-color: #fff;
 }
 
+#flash_notice {
+  display: none;
+}
+

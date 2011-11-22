@@ -1,3 +1,7 @@
-$("#event_<%= @event.id %>").slideUp("slow", function() { $(this).remove(); });
+$("#event_<%= @event.id %>")
+  .find('td').wrapInner('<div style="display: block;" />').parent().find('td > div')
+  .slideUp(1000, function() { 
+    $(this).parent().parent().remove(); 
+  });
 $("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
-$("#flash_notice").show("slow");
+$("#flash_notice").slideDown("slow");
