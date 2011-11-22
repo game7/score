@@ -1,0 +1,7 @@
+%tr{ :id => "event_#{event.id}" }
+  %td #{ event.starts.strftime('%D') }
+  %td #{ event.starts.strftime('%l:%M %P') }
+  %td #{ event.summary }
+  %td #{ event.status.humanize }
+  %td #{ event.venue_name }
+  %td #{ render_actions_for event }

@@ -9,14 +9,7 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
     %th Status
     %th Venue
     %th Actions
-  %tr
-    - @events.each do |event|
-      %td #{ event.starts.strftime('%D') }
-      %td #{ event.starts.strftime('%l:%M %P') }
-      %td #{ event.summary }
-      %td #{ event.status.humanize }
-      %td #{ event.venue_name }
-      %td #{ render_actions_for event }
+  = render :partial => 'event', :collection => @events
 
 %br/
 = link_to 'New Hockey Game', new_admin_hockey_game_path
