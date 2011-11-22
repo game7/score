@@ -42,7 +42,7 @@ module Score
       end
       
       def destroy
-        #@event.destroy
+        @event.destroy
         flash[:notice] = 'Event has been deleted'
       end
       
