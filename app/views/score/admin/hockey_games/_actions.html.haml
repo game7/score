@@ -1,5 +1,5 @@
 = link_to 'Edit', edit_polymorphic_path([:admin, event])
 = " | "
-= link_to 'Delete', admin_event_path(event), :confirm => 'Are you sure?', :method => :delete
+= link_to 'Delete', admin_event_path(event), :confirm => 'Are you sure?', :method => :delete, :remote => :true
 = " | "
 = link_to 'Result', new_admin_hockey_game_result_path(event), :remote => :true

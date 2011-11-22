@@ -42,9 +42,8 @@ module Score
       end
       
       def destroy
-        @event.destroy
+        #@event.destroy
         flash[:notice] = 'Event has been deleted'
-        redirect_to admin_events_path
       end
       
       private
