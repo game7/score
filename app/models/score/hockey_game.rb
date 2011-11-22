@@ -6,19 +6,67 @@ module Score
     before_validation :set_home_division_name
     before_validation :set_away_team_name
     before_validation :set_away_division_name
-    before_validation :set_summary_to_show_team_matchup
+    before_validation :set_status
+    before_validation :set_home_and_away_score_from_result
+    before_validation :set_summary
+
+    
 
     referenced_in :home_division, :class_name => 'Score::Division'
     field :home_division_name, type: String
     referenced_in :home_team, :class_name => 'Score::Team'
     field :home_team_name, type: String
     field :home_custom_name, type: Boolean
+    
+    field :home_score, type: Integer
+    attr_protected :home_score
 
     referenced_in :away_division, :class_name => 'Score::Division'
     field :away_division_name, type: String
     referenced_in :away_team, :class_name => 'Score::Team'
     field :away_team_name, type: String
     field :away_custom_name, type: Boolean
+    
+    field :away_score, type: Integer
+    attr_protected :away_score
+    
+    STATUS = %w[pending in-progress completed final]
+    field :status, type: String, default: 'pending'
+    attr_protected :status
+    
+    embeds_one :result, :class_name => 'Score::HockeyGameResult'
+    
+    def pending?
+      status == "pending"
+    end
+    
+    def has_result?
+      result != nil
+    end
+    
+    def home_team_winning?
+      home_score > away_score
+    end
+    
+    def away_team_winning?
+      away_score > home_score
+    end
+    
+    def winning_team_name
+      home_team_winning? ? home_team_name : away_team_name
+    end
+    
+    def winning_team_score
+      home_team_winning? ? home_score : away_score
+    end    
+    
+    def losing_team_name
+      home_team_winning? ? away_team_name : home_team_name
+    end
+    
+    def losing_team_score
+      home_team_winning? ? away_score : home_score
+    end   
     
     private
     
@@ -52,10 +100,31 @@ module Score
         else
           self.away_division_name = ''
         end
-      end      
+      end   
       
-      def set_summary_to_show_team_matchup
-        self.summary = "#{self.away_team_name} at #{self.home_team_name}"
+      def set_summary
+        self.summary = pending? ? summary_without_scores : summary_with_scores
+      end
+      
+      def summary_without_scores
+        "#{self.away_team_name} at #{self.home_team_name}"
+      end
+      
+      def summary_with_scores
+        "#{self.winning_team_name} #{self.winning_team_score}, #{self.losing_team_name} #{self.losing_team_score}"
+      end
+      
+      def set_status
+        if has_result?
+          self.status = result.final? ? "final" : "completed"
+        end
+      end
+      
+      def set_home_and_away_score_from_result
+        if has_result?
+          self.home_score = result.home_score
+          self.away_score = result.away_score
+        end
       end
   
   end

@@ -6,6 +6,7 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
     %th Date
     %th Time
     %th Summary
+    %th Status
     %th Venue
     %th Actions
   %tr
@@ -13,6 +14,7 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
       %td #{ event.starts.strftime('%D') }
       %td #{ event.starts.strftime('%l:%M %P') }
       %td #{ event.summary }
+      %td #{ event.status.humanize }
       %td #{ event.venue_name }
       %td #{ render_actions_for event }
 

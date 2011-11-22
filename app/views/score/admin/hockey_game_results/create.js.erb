@@ -1,0 +1,8 @@
+<% if @result.errors.any? %>
+	$("#flash_notice").hide(300);
+	$("#dialog-modal").html("<%= escape_javascript( render(:partial => "new") ) %>");
+<% else %>
+	$("#dialog-modal").dialog("close");
+	$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
+	$("#flash_notice").show(300);
+<% end %>

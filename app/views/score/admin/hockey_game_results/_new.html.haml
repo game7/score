@@ -1,0 +1,5 @@
+= semantic_form_for( @result, :url => admin_hockey_game_result_path(@game.id), :remote => true ) do |f|
+  = f.inputs do
+    = f.input :home_score
+    = f.input :away_score
+    = f.input :completed_in, :collection => Score::HockeyGameResult.completed_in_options

@@ -56,7 +56,7 @@ function load_team_dropdown(home_or_away, season_id, division_id) {
         alert("Failed to submit : "+ errorTextStatus+" ;"+error);
     },
     success: function(data){
-        $("select[id$='"+home_or_away+"_team_id option']").remove();
+        $("select[id$='"+home_or_away+"_team_id'] option").remove();
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $(row).appendTo("select[id$='"+home_or_away+"_team_id']"); 
         $.each(data, function(i, j){

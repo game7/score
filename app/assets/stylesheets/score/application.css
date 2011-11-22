@@ -9,6 +9,14 @@
  *= require jquery-ui
 */
 
+body {
+  font-family: helvetica, arial, sans-serif;
+}
+table, th, td {
+  border: 1px solid #999;
+  border-collapse: collapse;
+  padding: 5px;
+}
 #dialog-modal {
 	background-color: #fff;
 }

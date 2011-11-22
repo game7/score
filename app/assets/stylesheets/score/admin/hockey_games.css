@@ -2,3 +2,14 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+#hockey_game_starts {
+  width: 200px;
+}
+#hockey_game_duration {
+  width: 80px;
+}
+#hockey_game_away_team_name,
+#hockey_game_home_team_name {
+  width: 200px;
+}
