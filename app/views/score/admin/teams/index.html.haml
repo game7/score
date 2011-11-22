@@ -12,6 +12,7 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
       %td #{team.division_name}
       %td
         = link_to 'Edit', edit_admin_team_path(team)
+        = " | "
         = link_to 'Destroy', [:admin, team], :confirm => 'Are you sure?', :method => :delete
 %br/
 = link_to 'New Team', new_admin_team_path
