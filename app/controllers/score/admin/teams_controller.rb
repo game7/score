@@ -11,6 +11,8 @@ module Score
       def index
         @teams = Score::Team.for_season(@season)
         @teams = @teams.for_division(params[:division_id]) if params[:division_id]
+        @teams = @teams.asc(:division_name) unless params[:division_id]
+        @teams = @teams.asc(:name)
         respond_to do |format|
           format.json { render :json => @teams }
           format.html

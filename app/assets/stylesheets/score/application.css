@@ -25,3 +25,7 @@ table, th, td {
   display: none;
 }
 
+.clear {
+  clear: both;
+}
+
