@@ -4,7 +4,8 @@ module Score
     before_filter :find_game, :only => [:new, :create, :destroy]
 
     def new
-      @result = @game.build_result(@game.result.attributes)
+      atts = @game.result.attributes if @game.has_result?
+      @result = @game.build_result(atts)
     end
 
     def create
