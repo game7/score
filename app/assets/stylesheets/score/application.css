@@ -25,7 +25,6 @@ table, th, td {
   display: none;
 }
 
-.clear {
-  clear: both;
-}
-
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }

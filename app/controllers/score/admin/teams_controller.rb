@@ -33,6 +33,8 @@ module Score
 
       def new
         @team = Team.new
+        @team.season_id = params[:season_id] if params[:season_id]
+        @team.division_id = params[:division_id] if params[:division_id]
       end
       
       def create

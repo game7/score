@@ -3,6 +3,5 @@
 Season: #{select("season", :id, @season_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
 %div#divisions
   = render :partial => 'division', :collection => @divisions, :locals => { :teams => @teams }
-%br/
-= link_to 'New Team', new_admin_team_path, :remote => :true
+
 

@@ -1,5 +1,8 @@
 .division{ :id => "division_#{division.id}", :style => "margin-top: 3px;" }
-  .header{ :style => "background-color: #ddd; padding: 3px;" } #{division.name} Division
+  .header{ :style => "background-color: #ddd; padding: 3px;" } 
+    .left #{division.name} Division
+    .right= link_to 'Add New Team', new_admin_team_path(:season_id => division.season_id, :division_id => division.id), :remote => :true
+    .clear
   .teams
     = render :partial => 'team', :collection => teams.select{ |t| t.division_id == division.id }
   .clear
