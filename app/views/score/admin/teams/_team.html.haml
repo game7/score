@@ -3,7 +3,7 @@
   .info{ :style => "float: left; margin-left: 5px;" }
     .name #{team.name}
     .actions
-      = link_to 'Edit', edit_admin_team_path(team)
+      = link_to 'Edit', edit_admin_team_path(team), :remote => :true
       = " | "
-      = link_to 'Delete', [:admin, team], :confirm => 'Are you sure?', :method => :delete
+      = link_to 'Delete', [:admin, team], :confirm => 'Are you sure?', :method => :delete, :remote => :true
   .clear

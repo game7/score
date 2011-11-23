@@ -6,7 +6,7 @@ module Score
       before_filter :find_team, :only => [:show, :edit, :update, :destroy]
       before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_season_links, :only => [:index]
-      before_filter :get_divisions, :only => [:new, :create, :edit, :update]      
+      before_filter :get_divisions, :only => [:index, :new, :create, :edit, :update]      
       
       def index
         @teams = Score::Team.for_season(@season)
@@ -28,9 +28,6 @@ module Score
       def update
         if @team.update_attributes(params[:team])
           flash[:notice] = "Team has been updated"
-          redirect_to admin_teams_path(:season_id => @team.season_id)
-        else
-          render :action => 'edit'
         end
       end
 
@@ -42,17 +39,12 @@ module Score
         @team = Team.new(params[:team])
         if @team.save
           flash[:notice] = "Team has been created"
-          redirect_to admin_teams_path(:season_id => @team.season_id)
-        else
-          render :action => 'new'
         end
       end
       
       def destroy
-        @season_id = @team.season_id
         @team.destroy
         flash[:notice] = "Team has been deleted"
-        redirect_to admin_teams_path(:season_id => @season_id)
       end
       
       private
@@ -70,7 +62,7 @@ module Score
         end
         
         def get_divisions
-          @divisions = @season ? @season.divisions : []
+          @divisions = @season ? @season.divisions.asc(:name).entries : []
         end
         
         def get_season_links

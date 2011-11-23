@@ -1,5 +1,5 @@
 = javascript_include_tag :defaults
-= semantic_form_for [:admin, @team] do |f|
+= semantic_form_for [:admin, @team], :remote => :true do |f|
   = f.inputs do
     = f.input :season_id, :collection => @seasons
     = hidden_field_tag 'team_divisions_path', admin_season_divisions_path('_id', :format => 'json')
@@ -7,8 +7,3 @@
     = f.input :name
     = f.input :short_name
     = f.input :show_in_standings, :as => :boolean
-  = f.buttons do
-    = f.commit_button
-    %li
-      = link_to 'Cancel', admin_teams_path
-

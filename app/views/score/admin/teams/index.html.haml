@@ -1,16 +1,8 @@
 %h1 Teams
 
 Season: #{select("season", :id, @season_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
-.teams
-  - last_division_name = ""
-  - @teams.each do |team|
-    - unless team.division_name == last_division_name 
-      .clear
-      .division{ :style => "background-color: #ddd; padding: 3px;" } #{team.division_name} Division
-    = render :partial => 'team', :object => team
-    - unless team.division_name == last_division_name
-      - last_division_name = team.division_name
-  .clear
+%div#divisions
+  = render :partial => 'division', :collection => @divisions, :locals => { :teams => @teams }
 %br/
-= link_to 'New Team', new_admin_team_path
+= link_to 'New Team', new_admin_team_path, :remote => :true
 

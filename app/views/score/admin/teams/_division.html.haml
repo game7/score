@@ -1,0 +1,5 @@
+.division{ :id => "division_#{division.id}", :style => "margin-top: 3px;" }
+  .header{ :style => "background-color: #ddd; padding: 3px;" } #{division.name} Division
+  .teams
+    = render :partial => 'team', :collection => teams.select{ |t| t.division_id == division.id }
+  .clear
