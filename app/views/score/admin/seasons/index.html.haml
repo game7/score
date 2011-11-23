@@ -1,20 +1,8 @@
 %h1 Seasons
 
-%table
-  %tr
-    %th Name
-    %th Starts On
-    %th Actions
-  - @seasons.each do |season|
-    %tr
-      %td #{season.name}
-      %td #{season.starts_on}
-      %td
-        = link_to 'Edit', edit_admin_season_path(season)
-        = " | "
-        = link_to 'Destroy', [:admin, season], :confirm => 'Are you sure?', :method => :delete
-        = " | "
-        = link_to 'Divisions', admin_season_divisions_path(season)
+%div#seasons
+  = render :partial => 'season', :collection => @seasons
+  .clear
 %br/
 = link_to 'New Season', new_admin_season_path
 
