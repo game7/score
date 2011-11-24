@@ -5,7 +5,7 @@ module Score
       before_filter :find_season, :only => [:edit, :update, :destroy]
 
       def index
-        @seasons = Score::Season.all
+        @seasons = Score::Season.all.desc(:starts_on)
       end
 
       def new
@@ -16,9 +16,6 @@ module Score
         @season = Score::Season.new(params[:season])
         if @season.save
           flash[:notice] = "New Season has been created"
-          redirect_to admin_seasons_path
-        else
-          render :action => 'new'
         end
       end
 
@@ -29,16 +26,12 @@ module Score
       def update
         if @season.update_attributes(params[:season])
           flash[:notice] = "Season has been updated"
-          redirect_to admin_seasons_path
-        else
-          render :action => 'edit'
         end
       end
 
       def destroy
         @season.destroy
         flash[:notice] = "Season has been deleted"
-        redirect_to admin_seasons_path
       end
 
       private
