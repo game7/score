@@ -21,9 +21,6 @@ module Score
         @division = @season.divisions.build(params[:division])
         if @division.save
           flash[:notice] = "New Division has been Created"
-          redirect_to admin_season_divisions_path(@season)
-        else
-          render :action => 'new'
         end
       end
 
@@ -34,16 +31,12 @@ module Score
       def update
         if @division.update_attributes(params[:division])
           flash[:notice] = "Division has been Updated"
-          redirect_to admin_season_divisions_path(@season)
-        else
-          render :action => 'edit'
         end
       end
 
       def destroy
         @division.destroy
         flash[:notice] = "Division has been deleted"
-        redirect_to admin_season_divisions_path(@season)
       end
 
       private
