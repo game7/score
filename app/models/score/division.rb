@@ -31,6 +31,8 @@ module Score
     end
 
     references_many :teams, class_name: "Score::Team"
+    field :team_count, type: Integer, default: 0
+    attr_protected :team_count
 
     scope :with_name, lambda { |name| where(:name => name) }
     scope :with_slug, lambda { |slug| where(:slug => slug) }

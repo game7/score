@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Score::Division do
 
   it { should have_fields(:name, :slug) }
+  it { should have_fields(:team_count)}
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:slug) }
