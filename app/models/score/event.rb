@@ -13,10 +13,10 @@ module Score
 
     field :description, type: String
 
-    referenced_in :season, :class_name => 'Score::Season'
+    belongs_to :season, :class_name => 'Score::Season'
     validates :season_id, :presence => true
 
-    referenced_in :venue, :class_name => 'Score::Venue'
+    belongs_to :venue, :class_name => 'Score::Venue'
     field :venue_name, type: String
     field :venue_short_name, type: String
 

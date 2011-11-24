@@ -20,7 +20,7 @@ module Score
     field :season_name, type: String
     field :season_slug, type: String
 
-    references_many :teams, class_name: "Score::Team"
+    has_many :teams, class_name: "Score::Team", dependent: :destroy
     field :team_count, type: Integer, default: 0
     attr_protected :team_count
 

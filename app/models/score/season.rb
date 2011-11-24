@@ -12,7 +12,9 @@ module Score
 
       scope :with_name, lambda { |name| where(:name => name) }
 
-      references_many :divisions, class_name: "Score::Division"
+      has_many :divisions, class_name: "Score::Division", dependent: :destroy
+      
+      has_many :events, class_name: "Score::Event", dependent: :destroy
 
       class << self
         def most_recent
