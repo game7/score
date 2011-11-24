@@ -33,6 +33,12 @@ describe Score::Division do
     it "captures the season_slug" do
       @division.season_slug.should == @division.season.slug
     end
+    it "updates the team_count" do
+      @division.team_count.should == 0
+      @division.teams << Fabricate.build(:team, :division => @division)
+      @division.save
+      @division.team_count.should == 1
+    end
   end
 
 end

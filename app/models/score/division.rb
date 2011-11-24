@@ -1,6 +1,9 @@
 module Score
   class Division
     include Mongoid::Document
+    
+    before_save :update_season_info, :if => :season_id_changed?
+    before_save :update_team_count
 
     field :name, type: String
     validates :name, :presence => true
@@ -16,19 +19,6 @@ module Score
     validates :season_id, :presence => true
     field :season_name, type: String
     field :season_slug, type: String
-    before_save do |t|
-      update_season_info(self.season) if season_id_changed?
-    end
-
-    def update_season_info(s)
-      unless s == nil
-        self.season_name = s.name
-        self.season_slug = s.slug
-      else
-        self.season_name = ""
-        self.season_slug = ""
-      end
-    end
 
     references_many :teams, class_name: "Score::Team"
     field :team_count, type: Integer, default: 0
@@ -42,7 +32,31 @@ module Score
         season_id = ( season.class == Season ? season.id : season )
         where(:season_id => season_id)
       end
-    end    
+    end
+
+    def team_created
+      self.team_count += 1
+    end
+    
+    def team_destroyed
+      self.team_count -= 1
+    end
+    
+    private
+    
+      def update_season_info
+        if s = self.season
+          self.season_name = s.name
+          self.season_slug = s.slug
+        else
+          self.season_name = ""
+          self.season_slug = ""
+        end        
+      end
+      
+      def update_team_count
+        self.team_count = self.teams.count
+      end
 
   end
 end
