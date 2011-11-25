@@ -10,6 +10,9 @@ describe Score::Team do
 
   # Association with a Club
   it { should be_referenced_in(:club) }
+  
+  # belongs to an organization
+  it { should be_referenced_in(:organization)}
 
   # Association with a Division
   it { should be_referenced_in(:division) }
