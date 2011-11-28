@@ -1,14 +1,11 @@
 Score::Engine.routes.draw do
 
-  get "hockey_game_results/new"
-
-  get "hockey_game_results/edit"
-
   namespace :admin do
     resources :seasons, :shallow => true do
       resources :divisions
     end
     resources :clubs
+    resources :organizations
     resources :venues
     resources :teams
     resources :events

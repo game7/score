@@ -1,0 +1,9 @@
+<% if @organization.errors.any? %>
+	$("#flash_notice").hide(300);
+	$("#dialog-modal").html("<%= escape_javascript( render(:partial => "form") ) %>");
+<% else %>
+	$("#dialog-modal").dialog("close");
+	$("#organizations").append("<%= escape_javascript( render(:partial => "organization", :object => @organization) ) %>");	
+	$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
+	$("#flash_notice").show(300);
+<% end %>

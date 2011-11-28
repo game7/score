@@ -1,0 +1,8 @@
+%h1 Organizations
+
+%div#organizations
+  = render :partial => 'organization', :collection => @organizations
+.clear
+%br/
+= link_to 'New Organization', new_admin_organization_path, :remote => :true
+
