@@ -1,3 +1,0 @@
-$("#division_<%= @division.id %>").slideUp("slow", function() { $(this).remove(); });
-$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
-$("#flash_notice").slideDown("slow");
