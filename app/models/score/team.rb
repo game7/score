@@ -18,7 +18,6 @@ module Score
       t.slug = t.name.parameterize
     end
 
-    referenced_in :club, class_name: "Score::Club"
     belongs_to :organization, class_name: "Score::Organization"
 
     referenced_in :division, class_name: "Score::Division"
