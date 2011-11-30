@@ -1,6 +1,6 @@
 $('#dialog-modal').html("<%= escape_javascript( render(:partial => "form" ) ) %>");
 $('#dialog-modal').dialog({
-	title: 'Edit Organization',
+	title: 'Edit <%= @inflections[:singular] %>',
 	height: 300,
 	width: 400,
 	modal: true,

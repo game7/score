@@ -1,0 +1,7 @@
+en:
+  score:
+    crudify:
+      created: '%{what} was successfully added.'
+      updated: '%{what} was successfully updated.'
+      destroyed: '%{what} was successfully deleted.'
+          
