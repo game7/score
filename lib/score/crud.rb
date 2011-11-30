@@ -46,6 +46,7 @@ module Score
                               
           def new
             @instance = @#{instance_name} = #{class_name}.new
+            before_render_new
           end
         
           def create
@@ -62,6 +63,7 @@ module Score
         
           def edit
             # object gets found by find_#{instance_name} function
+            before_render_edit
           end
         
           def update
@@ -132,6 +134,12 @@ module Score
         
         def before_action
           true
+        end
+        
+        def before_render_new
+        end
+        
+        def before_render_edit
         end
       
     end
