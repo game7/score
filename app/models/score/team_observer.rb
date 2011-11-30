@@ -6,9 +6,9 @@ class Score::TeamObserver < Mongoid::Observer
   end
   
   def after_destroy(team)
-    if division = team.division
-      team.division.team_destroyed
-      team.division.save
+    if division = Score::Division.find(team.division_id)
+      division.team_destroyed
+      division.save
     end
   end
 

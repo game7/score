@@ -16,7 +16,7 @@ module Score
       
       def before_create
         @instance = @division = @season.divisions.build(params[:division])
-        true
+        super
       end
 
       private
