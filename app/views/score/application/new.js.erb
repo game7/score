@@ -2,7 +2,7 @@ $('#dialog-modal').html("<%= escape_javascript( render(:partial => "form" ) ) %>
 $('#dialog-modal').dialog({
 	title: 'New <%= @inflections[:singular] %>',
 	height: 'auto',
-	width: 400,
+	width: 'auto',
 	modal: true,
 	buttons: {
 		Save: function() {
