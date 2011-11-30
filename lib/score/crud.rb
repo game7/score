@@ -20,6 +20,7 @@ module Score
     
     def self.append_features(base)
       super
+      base.send(:include, Score::Crud::HookMethods)
       base.extend(Score::Crud::ClassMethods)
     end
     
@@ -48,7 +49,10 @@ module Score
           end
         
           def create
-            if (@instance = @#{instance_name} = #{class_name}.create(params[:#{instance_name}])).valid?
+            @instance = @#{instance_name} = #{class_name}.new(params[:#{instance_name}])
+            ok = before_create
+            return ok unless ok === true
+            if @instance.valid? && @instance.save
               (request.xhr? ? flash.now : flash).notice = t(
                 'score.crudify.created',
                 :what => @what
@@ -61,6 +65,8 @@ module Score
           end
         
           def update
+            ok = before_update
+            return ok unless ok === true
             if @#{instance_name}.update_attributes(params[:#{instance_name}])
               (request.xhr? ? flash.now : flash).notice = t(
                 'score.crudify.updated',
@@ -71,6 +77,8 @@ module Score
         
           def destroy
             # object gets found by find_#{instance_name} function
+            ok = before_destroy
+            return ok unless ok === true
             if @#{instance_name}.destroy
               (request.xhr? ? flash.now : flash).notice = t(
                 'score.crudify.destroyed',
@@ -103,6 +111,28 @@ module Score
         )
         
       end
+      
+    end
+    
+    module HookMethods
+      
+      private
+      
+        def before_create
+          before_action
+        end
+        
+        def before_update
+          before_action
+        end
+        
+        def before_destroy
+          before_action
+        end
+        
+        def before_action
+          true
+        end
       
     end
     
