@@ -1,15 +1,7 @@
 %h1 Venues
 
-%table
-  %tr
-    %th Name
-    %th Actions
-  - @venues.each do |venue|
-    %tr
-      %td #{venue.name}
-      %td
-        = link_to 'Edit', edit_admin_venue_path(venue)
-        = link_to 'Destroy', [:admin, venue], :confirm => 'Are you sure?', :method => :delete
+%div#venues
+  = render :partial => 'venue', :collection => @venues
+.clear
 %br/
-= link_to 'New Venue', new_admin_venue_path
-
+= link_to 'New Venue', new_admin_venue_path, :remote => :true
