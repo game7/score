@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::OrganizationsController do
+describe Score::Admin::OrganizationsController do
 
   describe "GET 'index'" do
     it "should be successful" do

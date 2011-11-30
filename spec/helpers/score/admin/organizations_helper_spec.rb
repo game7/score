@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe Admin::OrganizationsHelper do
+describe Score::Admin::OrganizationsHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end
