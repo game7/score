@@ -25,9 +25,9 @@ module Score
   
     def edit
     end
-  
+
     def update
-      if @game.update_attributes(params[:hockey_event])
+      if @game.update_attributes(params[:hockey_game])
         flash[:notice] = "Game has been updated"
         redirect_to admin_events_path
       else
