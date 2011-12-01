@@ -19,6 +19,8 @@ module Score
     end
 
     belongs_to :organization, class_name: "Score::Organization"
+    
+    has_many :players, class_name: "Score::Player", dependent: :destroy    
 
     referenced_in :division, class_name: "Score::Division"
     validates :division_id, :presence => true

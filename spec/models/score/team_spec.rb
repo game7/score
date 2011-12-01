@@ -8,9 +8,6 @@ describe Score::Team do
   it { should validate_presence_of(:short_name) }
   it { should validate_presence_of(:slug) }
 
-  # Association with a Club
-  it { should be_referenced_in(:club) }
-  
   # belongs to an organization
   it { should be_referenced_in(:organization)}
 
@@ -22,6 +19,9 @@ describe Score::Team do
   # Association with a Season
   it { should be_referenced_in(:season) }
   it { should have_fields(:season_name, :season_slug) }
+  
+  # Association with players
+  it { should have_many(:players) }  
 
   context "upon saving" do
     before(:all) do
