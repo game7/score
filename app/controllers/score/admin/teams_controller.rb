@@ -23,7 +23,11 @@ module Score
       def before_render_new
         @team.season_id = params[:season_id] if params[:season_id]
         @team.division_id = params[:division_id] if params[:division_id]
-      end      
+      end
+      
+      def show
+        
+      end
       
       private
       
