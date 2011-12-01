@@ -26,7 +26,7 @@ module Score
       end
       
       def show
-        
+        @players = @team.players.asc(:last)
       end
       
       private

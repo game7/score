@@ -11,4 +11,8 @@ class Score::Player
   
   belongs_to :team, class_name: "Score::Team"
   
+  def fullname
+    "#{first} #{last}"
+  end
+  
 end

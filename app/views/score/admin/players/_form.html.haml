@@ -1,0 +1,5 @@
+= semantic_form_for [:admin, params[:action] == "edit" ? nil : @team, @player], :remote => :true do |f|
+  = f.inputs do
+    = f.input :first
+    = f.input :last
+    = f.input :jersey_number

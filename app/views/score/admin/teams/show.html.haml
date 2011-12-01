@@ -1,1 +1,6 @@
 %h1= @team.name
+%div#players
+  = render :partial => 'score/admin/players/player', :collection => @players
+.clear
+%br/
+= link_to 'Add Player', new_admin_team_player_path(@team), :remote => :true
