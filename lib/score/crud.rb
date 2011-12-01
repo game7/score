@@ -58,6 +58,9 @@ module Score
                 'score.crudify.created',
                 :what => @what
               )
+              redirect_to :back unless request.xhr?
+            else
+              render :action => 'new' unless request.xhr?
             end
           end
         
@@ -67,6 +70,7 @@ module Score
           end
         
           def update
+            puts request.xhr?
             ok = before_update
             return ok unless ok === true
             if @#{instance_name}.update_attributes(params[:#{instance_name}])
@@ -74,6 +78,9 @@ module Score
                 'score.crudify.updated',
                 :what => @what
               )
+              redirect_to :back unless request.xhr?
+            else
+              render :action => 'edit' unless request.xhr?
             end
           end
         
@@ -86,6 +93,7 @@ module Score
                 'score.crudify.destroyed',
                 :what => @what
               )
+              redirect_to :back unless request.xhr?
             end
           end
         
