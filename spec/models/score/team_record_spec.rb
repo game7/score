@@ -13,23 +13,39 @@ describe Score::TeamRecord do
   describe 'when posting game results' do
     
     def setup_result(home_score, away_score, completed_in = 'regulation')
-      @game = Fabricate.build(:hockey_game)
-      @game.build_result(:home_score => home_score, :away_score => away_score, :completed_in => completed_in)
-      @game.save
-      @home = @game.home_team.record
-      @away = @game.away_team.record
-      @home.post_game(@game)
-      @away.post_game(@game)
+      @home ||= Fabricate(:team)
+      @away ||= Fabricate(:team)
+      game = Fabricate.build(:hockey_game, :home_team => @home, :away_team => @away)
+      game.build_result(:home_score => home_score, :away_score => away_score, :completed_in => completed_in)
+      game.save
+      @home.record.post_game(game)
+      @away.record.post_game(game)
     end
     
-    it "should be able to correctly update the scoring" do
-      setup_result(h = 4, a = 2)
-      @home.scored.should == h
-      @home.allowed.should == a
-      @home.margin.should == (h-a)
-      @away.scored.should == a
-      @away.allowed.should == h
-      @away.margin.should == (a-h)
+    it "should correctly update the scoring" do
+      setup_result(h = rand(5), a = rand(5))
+      @home.record.scored.should == h
+      @home.record.allowed.should == a
+      @home.record.margin.should == (h-a)
+      @away.record.scored.should == a
+      @away.record.allowed.should == h
+      @away.record.margin.should == (a-h)
+    end
+    
+    it "should correctly update the streak for win/loss" do
+      n = rand(5) + 1
+      n.times { |i| setup_result(2,1) }
+      
+      @home.record.stk.should == "Won #{n}"
+      @away.record.stk.should == "Lost #{n}"
+    end
+    
+    it "should correctly update the streak for ties" do
+      n = rand(5) + 1
+      n.times { |i| setup_result(3,3) }
+      
+      @home.record.stk.should == "Tied #{n}"
+      @away.record.stk.should == "Tied #{n}"
     end
     
   end
