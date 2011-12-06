@@ -21,7 +21,7 @@ module Score
       self.load_team_and_game(params[:team], params[:game]) if params[:game] && params[:team] if (params && params[:game] && params[:team])
     end
     
-    def set_decision      
+    def set_decision
       margin = scored - allowed
       self.decision = 'win' and return if margin > 0
       self.decision = 'tie' and return if margin == 0
@@ -29,12 +29,12 @@ module Score
     end   
     
     def load_team_and_game(team, game)
-
+    
       team_id = team.class == Score::Team ? team.id : team
     
       self.game_id = game.id
       self.played_on = game.starts.to_date
-      self.completed_in = game.completed_in
+      self.completed_in = game.result.completed_in
     
       self.opponent_id = game.opponent_id(team)
       self.opponent_name = game.opponent_name(team)

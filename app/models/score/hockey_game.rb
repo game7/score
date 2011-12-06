@@ -44,6 +44,43 @@ module Score
       result != nil
     end
     
+    def has_team?(team)
+      is_home_team?(team) || is_away_team?(team)
+    end    
+    
+    def is_home_team?(team)
+      team_id_for(team) == home_team_id
+    end
+    
+    def is_away_team?(team)
+      team_id_for(team) == away_team_id
+    end    
+    
+    def opponent(team)
+      throw :team_not_present unless has_team?(team)
+      is_home_team?(team) ? away_team : home_team
+    end
+
+    def opponent_id(team)
+      throw :team_not_present unless has_team?(team)
+      is_home_team?(team) ? away_team_id : home_team_id
+    end
+
+    def opponent_name(team)
+      throw :team_not_present unless has_team?(team)
+      is_home_team?(team) ? away_team_name : home_team_name
+    end
+    
+    def team_score(team)
+      throw :team_not_present unless has_team?(team)
+      is_home_team?(team) ? home_score : away_score   
+    end
+    
+    def opponent_score(team)
+      throw :team_not_present unless has_team?(team)
+      is_home_team?(team) ? away_score : home_score      
+    end    
+    
     def home_team_winning?
       home_score > away_score
     end
@@ -69,7 +106,11 @@ module Score
     end   
     
     private
-    
+
+      def team_id_for(team)
+        team.class == Score::Team ? team.id : team
+      end
+      
       def set_home_team_name
         if t = self.home_team
           self.home_team_name = t.name unless home_custom_name

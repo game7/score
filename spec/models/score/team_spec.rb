@@ -22,6 +22,8 @@ describe Score::Team do
   
   # Association with players
   it { should have_many(:players) }  
+  
+  it { should embed_one(:record) }
 
   context "upon saving" do
     before(:all) do
@@ -37,6 +39,12 @@ describe Score::Team do
       @team.short_name = nil
       @team.save
       @team.short_name.should == @team.name
+    end
+    
+    it "generates a team record if one doesn't exist" do
+      @team.record = nil
+      @team.save
+      @team.record.class.should == Score::TeamRecord
     end
 
     it "generates a slug" do

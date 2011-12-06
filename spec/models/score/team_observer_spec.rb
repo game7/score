@@ -1,44 +1,34 @@
 require 'spec_helper'
+require 'mocha'
 
 describe Score::TeamObserver do
 
   let (:observer) do
     Score::TeamObserver.instance
   end
-
-  describe "#after_create" do
-
-    let(:season) { Fabricate(:season) }
-    let(:division) { Fabricate(:division, :season => season) }
-    let(:team) { Fabricate(:team, :division => division)}
-
-    before do
-      team.save
-      observer.after_create(team)
-    end
-
-    it "updates the team_count name for the parent division" do
-      division.team_count.should == 1
-    end
-
-  end
   
   describe "#after_create" do
 
-    let(:season) { Fabricate(:season) }
-    let(:division) { Fabricate(:division, :season => season) }
-    let(:team) { Fabricate(:team, :division => division)}
-
-    before do
-      team.save
-    end
-
-    it "updates the team_count name for the parent division" do
-      division.team_count.should == 1
-      observer.after_destroy(team)
-      division.team_count.should == 0   
+    it "notifies the parent division that team was created" do
+      division = mock()
+      division.expects(:team_created).once
+      division.expects(:save).once
+      team = mock()
+      team.expects(:division).returns(division)
+      observer.after_create(team)
     end
 
   end  
+  
+  describe "#after_destroy" do
+    it "notifies the parent division that team was destroyed" do
+      division = mock()
+      division.expects(:team_destroyed).once
+      division.expects(:save).once
+      team = mock()
+      team.expects(:division).returns(division)
+      observer.after_destroy(team)
+    end
+  end
   
 end

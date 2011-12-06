@@ -30,6 +30,10 @@ module Score
     referenced_in :season, class_name: "Score::Season"
     field :season_name, type: String
     field :season_slug, type: String
+    
+    embeds_one :record, class_name: "Score::TeamRecord"
+    
+    before_save :ensure_record
 
     before_save do |t|
       update_division_info(self.division) if division_id_changed?
@@ -62,6 +66,12 @@ module Score
         where(:division_id => division_id)
       end
     end
+    
+    private
+    
+      def ensure_record
+        self.record ||= Score::TeamRecord.new
+      end
 
   end
 end

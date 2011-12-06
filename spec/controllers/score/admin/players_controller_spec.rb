@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Admin::PlayersController do
+describe Score::Admin::PlayersController do
 
 end

@@ -57,11 +57,73 @@ describe Score::HockeyGame do
     specify { @game.winning_team_name.should == (@game.home_team_winning? ? @game.home_team_name : @game.away_team_name) }
     specify { @game.losing_team_name.should == (@game.home_team_winning? ? @game.away_team_name : @game.home_team_name) }
     
+    it "should update the home and away team scoresn from the result" do
+      @game.home_score.should == @game.result.home_score
+      @game.away_score.should == @game.result.away_score
+    end
+    
     it "should update the summary to contain the team names and score" do
       puts @game.status
       @game.summary.should == "#{@game.winning_team_name} #{@game.winning_team_score}, #{@game.losing_team_name} #{@game.losing_team_score}"
     end
     
+  end
+  
+
+  context "when requesting the opponent of a team" do
+
+    before(:all) do
+      @game = Fabricate(:hockey_game)
+    end
+
+    it "should correctly return the opponent for the away team" do
+      @game.opponent(@game.away_team).id.should == @game.home_team.id
+    end
+
+    it "should correctly return the opponent for the home team" do
+      @game.opponent(@game.home_team).id.should == @game.away_team.id
+    end
+
+    it "should correctly return the opponent_id from the left" do
+      @game.opponent_id(@game.away_team).should == @game.home_team.id
+    end
+
+    it "should correctly return the opponent_id from the right" do
+      @game.opponent_id(@game.home_team).should == @game.away_team.id
+    end
+
+    it "should correctly return the opponent_name from the left" do
+      @game.opponent_name(@game.away_team).should == @game.home_team.name
+    end
+
+    it "should correctly return the opponent_name from the right" do
+      @game.opponent_name(@game.home_team).should == @game.away_team.name
+    end
+
+    it "should throw team_not_present if the team is not associated" do
+      lambda{@game.opponent(Fabricate.build(:team))}.should throw_symbol(:team_not_present)
+    end
+    
+  end 
+  
+  context 'when requesting scores for a team' do
+    
+    before(:all) do
+      @game = Fabricate.build(:hockey_game)
+      @game.result = Fabricate.build(:hockey_game_result)
+      @game.save
+    end
+    
+    it "should correctly return the score for a team" do
+      @game.team_score(@game.home_team_id).should == @game.home_score
+      @game.team_score(@game.away_team_id).should == @game.away_score
+    end
+    
+    it "should correctly return the score for a team's opponnent" do
+      @game.opponent_score(@game.home_team_id).should == @game.away_score
+      @game.opponent_score(@game.away_team_id).should == @game.home_score
+    end
+  
   end
   
 end

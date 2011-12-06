@@ -13,7 +13,7 @@ describe Score::TeamGameResult do
     it "should correctly capture the game info" do
       @team_game_result.game_id.should == @game.id
       @team_game_result.played_on.should == @game.starts.to_date
-      @team_game_result.completed_in.should == @game.completed_in
+      @team_game_result.completed_in.should == @game.result.completed_in
     end
     
     it "should correctly capture the opponent of the current team" do
