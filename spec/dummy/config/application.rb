@@ -48,7 +48,7 @@ module Dummy
       g.template_engine :haml
     end
     
-    config.active_record.observers = 'score/division_observer', 'score/season_observer', 'score/team_observer'
+    config.active_record.observers = 'score/division_observer', 'score/season_observer', 'score/team_observer', 'score/hockey_game_result_observer'
 
   end
 end
