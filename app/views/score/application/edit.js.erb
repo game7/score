@@ -1,4 +1,7 @@
 $('#dialog-modal').html("<%= escape_javascript( render(:partial => "form" ) ) %>");
+if (typeof eval(window.bind_<%= @inflections[:singular].downcase %>_event_handlers) == 'function') { 
+  bind_<%= @inflections[:singular].downcase %>_event_handlers();
+}
 $('#dialog-modal').dialog({
 	title: 'Edit <%= @inflections[:singular] %>',
 	height: 'auto',

@@ -34,7 +34,7 @@ module Score
     field :status, type: String, default: 'pending'
     attr_protected :status
     
-    embeds_one :result, :class_name => 'Score::HockeyGameResult'
+    embeds_one :result, :class_name => 'Score::HockeyGameResult', :cascade_callbacks => true
     
     def pending?
       status == "pending"

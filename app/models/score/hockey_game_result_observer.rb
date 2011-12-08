@@ -1,7 +1,7 @@
 class Score::HockeyGameResultObserver < Mongoid::Observer
   
   def after_create(game_result)
-    post_to_team_records(game_result.game) if game_result.final?
+    post_to_team_records(game_result.game)
   end
   
   private 

@@ -20,6 +20,9 @@ module Score
         def most_recent
           where(:starts_on.lt => DateTime.now).desc(:starts_on).first
         end
+        def next
+          where(:starts_on.gt => DateTime.now).asc(:starts_on).first
+        end
         def latest
           desc(:starts_on).first
         end

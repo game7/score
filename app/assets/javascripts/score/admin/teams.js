@@ -3,6 +3,10 @@
 
 
 $(document).ready(function(){
+  bind_team_event_handlers();
+});
+
+function bind_team_event_handlers() {
 	$('#team_season_id').change(function(){
 		var season_id = $(this).val();
 		if (season_id == "") {
@@ -30,6 +34,6 @@ $(document).ready(function(){
 				}
 			});
 		}
-	});
-});
+	});   
+}
 

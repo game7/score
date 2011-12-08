@@ -1,0 +1,32 @@
+%h1 Standings#index
+
+%table
+  %tr
+    %th Team
+    %th GP
+    %th W
+    %th L
+    %th T
+    %th OTL
+    %th SOL
+    %th Pts
+    %th GS
+    %th GA
+    %th +/-
+    %th STK
+  - @teams.each do |team|
+    %tr
+      %td= team.name
+      %td= team.record.gp
+      %td= team.record.w
+      %td= team.record.l
+      %td= team.record.t
+      %td= team.record.otl
+      %td= team.record.sol
+      %td= team.record.pts
+      %td= team.record.scored
+      %td= team.record.allowed
+      %td= team.record.margin
+      %td= team.record.stk    
+    
+    

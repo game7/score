@@ -33,6 +33,7 @@ module Score
       
         def find_season
           @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Score::Season.most_recent
+          @season ||= Score::Season.next
         end
         
         def get_seasons
