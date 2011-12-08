@@ -19,5 +19,6 @@ module Score
     def self.completed_in_options
       COMPLETED_IN.collect{ |o| [o.humanize, o] }
     end
+      
   end
 end

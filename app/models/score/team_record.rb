@@ -50,6 +50,11 @@ module Score
       apply_result Score::TeamGameResult.new(:team => self.team.id, :game => game)
     end
     
+    def post_game!(game)
+      post_game(game)
+      save
+    end
+    
     def remove_result_for_game(game)
       remove_result self.results.where( :game_id => game.id ).first
     end
