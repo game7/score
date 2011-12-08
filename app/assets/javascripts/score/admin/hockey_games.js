@@ -60,7 +60,7 @@ function load_team_dropdown(home_or_away, season_id, division_id) {
         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
         $(row).appendTo("select[id$='"+home_or_away+"_team_id']"); 
         $.each(data, function(i, j){
-            row = "<option value=\"" + j._id + "\">" + j.name + " (" + j.division_name + " Division)</option>";
+            row = "<option value=\"" + j._id + "\">" + j.name + "</option>";
             $(row).appendTo("select[id$='"+home_or_away+"_team_id']");
         });
      }
