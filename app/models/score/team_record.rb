@@ -46,17 +46,13 @@ module Score
     end
     
     def post_game(game)
-      raise 'Game already posted to team record' if game_posted?(game)
+      remove_result_for_game(game) if game_posted?(game)
       apply_result Score::TeamGameResult.new(:team => self.team.id, :game => game)
     end
     
-    def post_game!(game)
-      post_game(game)
-      save
-    end
-    
     def remove_result_for_game(game)
-      remove_result self.results.where( :game_id => game.id ).first
+      remove_result result = self.results.where( :game_id => game.id ).first
+      result.delete
     end
     
     def apply_decision(decision, completed_in, i)
@@ -99,7 +95,7 @@ module Score
       self.allowed -= result.allowed
       self.update_margin!
       self.update_streak!
-      
+
     end
     
     def game_posted?(game)
