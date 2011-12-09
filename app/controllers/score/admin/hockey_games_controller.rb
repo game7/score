@@ -1,3 +1,5 @@
+require 'chronic'
+
 module Score
   class Admin::HockeyGamesController < ApplicationController
 
@@ -13,6 +15,7 @@ module Score
     end
   
     def create
+      params[:hockey_game][:starts] = Chronic.parse(params[:hockey_game][:starts])
       @game = Score::HockeyGame.new(params[:hockey_game])
       if @game.save
         flash[:notice] = "New Hockey Game has been created"
@@ -27,6 +30,7 @@ module Score
     end
 
     def update
+      params[:hockey_game][:starts] = Chronic.parse(params[:hockey_game][:starts])      
       if @game.update_attributes(params[:hockey_game])
         flash[:notice] = "Game has been updated"
         redirect_to admin_events_path

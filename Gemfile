@@ -16,6 +16,7 @@ gem "haml-rails"
 gem "carrierwave"
 gem "carrierwave-mongoid", require: "carrierwave/mongoid"
 gem "formtastic"
+gem "chronic"
 
 
 group :development, :test do
