@@ -42,17 +42,17 @@ module Score
       self.team_count -= 1
     end
     
+    def update_season_info
+      if s = self.season
+        self.season_name = s.name
+        self.season_slug = s.slug
+      else
+        self.season_name = ""
+        self.season_slug = ""
+      end        
+    end
+      
     private
-    
-      def update_season_info
-        if s = self.season
-          self.season_name = s.name
-          self.season_slug = s.slug
-        else
-          self.season_name = ""
-          self.season_slug = ""
-        end        
-      end
       
       def update_team_count
         self.team_count = self.teams.count
