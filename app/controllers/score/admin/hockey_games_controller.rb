@@ -11,7 +11,7 @@ module Score
     before_filter :load_teams
         
     def new
-      @game = Score::HockeyGame.new      
+      @game = Score::HockeyGame.new(:season => @season)
     end
   
     def create
@@ -56,7 +56,7 @@ module Score
       end
     
       def load_seasons
-        @seasons = Score::Season.all.desc(:starts_on).entries
+        @seasons = Score::Season.all.asc(:starts_on).entries
       end
       
       def load_divisions

@@ -3,13 +3,14 @@ module Score
     class EventsController < ApplicationController
       
       before_filter :find_event, :only => [:edit, :update, :destroy]
+      before_filter :find_season, :only => [:index, :new, :create, :edit, :update]      
       before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_venues, :only => [:new, :create, :edit, :update]
       before_filter :get_season_links, :only => [:index] 
       
       
       def index
-        @events = Score::Event.all.asc(:starts)
+        @events = Score::Event.for_season(@season).asc(:starts)
       end
   
       def new
@@ -52,8 +53,13 @@ module Score
           @event = Score::Event.find(params[:id])
         end
         
+        def find_season
+          @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Score::Season.most_recent
+          @season ||= Score::Season.next
+        end        
+        
         def get_season_links
-          @season_links = Score::Season.asc(:starts_on).each.collect{ |s| [s.name, admin_teams_path(:season_id => s.id)] }
+          @season_links = Score::Season.asc(:starts_on).each.collect{ |s| [s.name, admin_events_path(:season_id => s.id)] }
         end
         
         def get_seasons

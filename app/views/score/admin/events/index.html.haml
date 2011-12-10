@@ -12,6 +12,6 @@ Season: #{select("season", :id, @season_links, {:selected => request.fullpath },
   = render :partial => 'event', :collection => @events
 
 %br/
-= link_to 'New Hockey Game', new_admin_hockey_game_path
+= link_to 'New Hockey Game', new_admin_hockey_game_path(:season_id => @season.id)
 
 
