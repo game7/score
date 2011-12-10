@@ -9,7 +9,7 @@ module Score
       
       
       def index
-        @events = Score::Event.all
+        @events = Score::Event.all.asc(:starts)
       end
   
       def new
