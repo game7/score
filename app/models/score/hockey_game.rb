@@ -9,6 +9,7 @@ module Score
     before_validation :set_status
     before_validation :set_home_and_away_score_from_result
     before_validation :set_summary
+    before_validation :set_division_ids
 
     
 
@@ -166,6 +167,12 @@ module Score
           self.home_score = result.home_score
           self.away_score = result.away_score
         end
+      end
+      
+      def set_division_ids
+        self.division_ids = []
+        self.division_ids << self.home_division_id if self.home_division_id
+        self.division_ids << self.away_division_id if self.away_division_id
       end
   
   end

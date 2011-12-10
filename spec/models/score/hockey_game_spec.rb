@@ -43,6 +43,11 @@ describe Score::HockeyGame do
       @game.home_score.should == @game.result.home_score
       @game.away_score.should == @game.result.away_score
     end
+    
+    it "should capture the home and away team divisions into division_ids array" do
+      @game.division_ids.include?(@game.home_division_id).should == true
+      @game.division_ids.include?(@game.away_division_id).should == true
+    end
 
   end  
   
