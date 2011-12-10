@@ -3,14 +3,18 @@ module Score
     class EventsController < ApplicationController
       
       before_filter :find_event, :only => [:edit, :update, :destroy]
-      before_filter :find_season, :only => [:index, :new, :create, :edit, :update]      
+      before_filter :find_season, :only => [:index, :new, :create, :edit, :update] 
+      before_filter :find_division, :only => [:index]     
       before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_venues, :only => [:new, :create, :edit, :update]
-      before_filter :get_season_links, :only => [:index] 
+      before_filter :get_season_links, :only => [:index]
+      before_filter :get_division_links, :only => [:index]      
       
       
       def index
-        @events = Score::Event.for_season(@season).asc(:starts)
+        @events = Score::Event.for_season(@season)
+        @events = @events.for_division(@division) if @division
+        @events = @events.asc(:starts)
       end
   
       def new
@@ -56,11 +60,21 @@ module Score
         def find_season
           @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Score::Season.most_recent
           @season ||= Score::Season.next
+        end
+        
+        def find_division
+          @division = Score::Division.find(params[:division_id]) if params[:division_id]
         end        
         
         def get_season_links
           @season_links = Score::Season.asc(:starts_on).each.collect{ |s| [s.name, admin_events_path(:season_id => s.id)] }
         end
+        
+        def get_division_links
+          @division_links = []
+          @division_links << ['All', admin_events_path(:season_id => @season.id)]
+          @division_links.concat @season.divisions.asc(:name).each.collect{ |d| [d.name, admin_events_path(:season_id => @season.id, :division_id => d.id)] }
+        end        
         
         def get_seasons
           @seasons = Score::Season.all.desc(:starts_on)

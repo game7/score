@@ -1,6 +1,7 @@
 %h1 Events
 
 Season: #{select("season", :id, @season_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
+Division: #{select("division", :id, @division_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
 %table
   %tr
     %th Date
