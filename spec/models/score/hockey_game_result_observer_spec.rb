@@ -11,7 +11,7 @@ describe Score::HockeyGameResultObserver do
 
     it "posts the game to the both the home and away team's records" do
       game_result = mock()
-      game_result.expects(:final?).returns(true)
+      #game_result.expects(:final?).returns(true)
       game_result.expects(:game).returns(game = mock())
       game.expects(:home_team).returns(home_team = mock()).at_least_once
       game.expects(:away_team).returns(away_team = mock()).at_least_once
