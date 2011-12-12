@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StandingsController do
+describe Score::StandingsController do
 
   describe "GET 'index'" do
     it "returns http success" do
