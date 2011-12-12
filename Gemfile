@@ -17,9 +17,11 @@ gem "carrierwave"
 gem "carrierwave-mongoid", require: "carrierwave/mongoid"
 gem "formtastic"
 gem "chronic"
+gem "rmagick"
 
 
 group :development, :test do
+  gem 'spork'
   # gem "factory_girl_rails", '>= 1.2.0'
   gem "fabrication"
   gem "mocha"
