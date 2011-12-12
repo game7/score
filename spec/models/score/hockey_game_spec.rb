@@ -38,6 +38,7 @@ describe Score::HockeyGame do
     specify { @game.summary.should == "#{@game.away_team_name} at #{@game.home_team_name}" }
     
     it "should update the home and away scores from the result" do
+      @game = Fabricate.build(:hockey_game)
       @game.result = Fabricate.build(:hockey_game_result)
       @game.save
       @game.home_score.should == @game.result.home_score
