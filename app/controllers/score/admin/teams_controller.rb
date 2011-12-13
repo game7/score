@@ -7,7 +7,8 @@ module Score
       before_filter :find_season, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
       before_filter :get_season_links, :only => [:index]
-      before_filter :get_divisions, :only => [:index, :new, :create, :edit, :update]      
+      before_filter :get_divisions, :only => [:index, :new, :create, :edit, :update]
+      before_filter :get_organizations, :only => [:new, :create, :edit, :update]
       
       def index
         @teams = Score::Team.for_season(@season)
@@ -46,6 +47,10 @@ module Score
         
         def get_season_links
           @season_links = Score::Season.asc(:starts_on).each.collect{ |s| [s.name, admin_teams_path(:season_id => s.id)] }
+        end
+        
+        def get_organizations
+          @organizations = Score::Organization.asc(:name).entries
         end
 
     end
