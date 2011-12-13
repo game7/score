@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.Jcrop.min
 //= require_tree .
 
 $(document).ready(function(){

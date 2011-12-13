@@ -3,5 +3,19 @@
     - if @logo.image?
       %li
         = image_tag @logo.image.url.to_s, { :id => 'target' }
+        #thumb-frame= image_tag @logo.image.url.to_s, { :id => 'thumb' }
+        #tiny-frame= image_tag @logo.image.url.to_s, { :id => 'tiny' }
+        #micro-frame= image_tag @logo.image.url.to_s, { :id => 'micro' }
+        .clear            
     = f.input :image, :as => :file
     = f.input :image_cache, :as => :hidden
+    = f.input :crop_x, :as => :hidden
+    = f.input :crop_y, :as => :hidden
+    = f.input :crop_w, :as => :hidden
+    = f.input :crop_h, :as => :hidden
+    
+:css
+  #thumb-frame, #tiny-frame, #micro-frame { width: 100px; height:100px; float: left; overflow:hidden; margin-right: 5px; margin-top: 5px;} }
+  #thumb-frame { width: 100px; height: 100px}
+  #tiny-frame { width: 50px; height: 50px}
+  #micro-frame { width: 25px; height: 25px}
