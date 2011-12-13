@@ -1,5 +1,6 @@
 class Score::Logo
   include Mongoid::Document
+  after_save :recreate_versions, :if => :crop_changed?
   
   embedded_in :logoable, polymorphic: true
   
@@ -17,5 +18,11 @@ class Score::Logo
   end
   
   mount_uploader :image, Score::LogoUploader
+  
+  private
+  
+    def recreate_versions
+      image.recreate_versions!
+    end
     
 end
