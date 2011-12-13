@@ -12,5 +12,12 @@ module Score
       end 
       groups
     end
+    def logo_edit_link(team)
+      img_url = "#{team.logo.image.tiny.url.to_s}?#{Time.now.to_i}"
+      edit_url = edit_admin_team_logo_path(team)
+      image = image_tag img_url, :alt => team.name if team.has_logo?
+      image ||= 'edit'
+      link_to image, edit_url, :class => 'logo edit', :title => 'Edit Team Logo', :remote => true
+    end
   end
 end

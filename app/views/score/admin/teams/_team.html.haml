@@ -1,14 +1,12 @@
 .team{ :id => "team_#{team.id}", :style => "border: 1px solid #999; padding: 5px; width: 240px; margin: 3px; float: left;" }
   .logo{ :style => "border: 1px solid #999; height: 50px; width: 50px; float: left;" }
-    = image_tag "#{team.logo.image.tiny.url.to_s}?#{Time.now.to_i}", :alt => team.name if team.has_logo?
+    = logo_edit_link team
   .info{ :style => "float: left; margin-left: 5px;" }
     .name #{team.name}
     .actions
       = link_to 'Show', [:admin, team]
       = " | "
       = link_to 'Edit', edit_admin_team_path(team), :remote => :true
-      = " | "
-      = link_to 'Logo', edit_admin_team_logo_path(team), :remote => true
       = " | "
       = link_to 'Delete', [:admin, team], :confirm => 'Are you sure?', :method => :delete, :remote => :true
   .clear
