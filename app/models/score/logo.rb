@@ -16,5 +16,6 @@ class Score::Logo
     crop_x_changed? || crop_y_changed? || crop_h_changed? || crop_w_changed?
   end
   
+  mount_uploader :image, Score::LogoUploader
     
 end
