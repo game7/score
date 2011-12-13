@@ -6,6 +6,9 @@ module Score
     before_save do |t|
       update_division_info(self.division) if division_id_changed?
     end
+    before_save do |t|
+      update_organization_info(self.organization)
+    end
     before_validation do |t|
       t.short_name ||= t.name
       t.slug = t.name.parameterize if t.name
@@ -23,6 +26,8 @@ module Score
     field :show_in_standings, type: Boolean, default: true
 
     belongs_to :organization, class_name: "Score::Organization"
+    field :organization_name, type: String
+    field :organization_slug, type: String
     
     has_many :players, class_name: "Score::Player", dependent: :destroy    
 
@@ -43,8 +48,6 @@ module Score
       logo.present? && logo.image.present? && logo.image.url.present?
     end
     
-
-
     def update_division_info(d)
       unless d == nil
         self.division_name = d.name
@@ -59,6 +62,16 @@ module Score
         self.season_id = nil
         self.season_name = ""
         self.season_slug = ""
+      end
+    end
+    
+    def update_organization_info(o)
+      unless o == nil
+        self.organization_name = o.name
+        self.organization_slug = o.slug
+      else
+        self.organization_name = ""
+        self.organization_slug = ""
       end
     end
     

@@ -3,5 +3,6 @@ Fabricator(:team, :class_name => Score::Team) do
   short_name { |team| team.name }
   show_in_standings true
   division
+  organization
 end
 

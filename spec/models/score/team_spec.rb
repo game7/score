@@ -10,6 +10,7 @@ describe Score::Team do
 
   # belongs to an organization
   it { should be_referenced_in(:organization)}
+  it { should have_fields(:organization_name, :organization_slug)}
 
   # Association with a Division
   it { should be_referenced_in(:division) }
@@ -68,7 +69,14 @@ describe Score::Team do
     it "captures the season_slug from its division" do
       @team.season_slug.should == @team.division.season_slug
     end
+    it "captures the organization_name from its organization" do
+      @team.organization_name.should == @team.organization.name
+    end
+    it "captures the organization_slug from its organization" do
+      @team.organization_slug.should == @team.organization.slug
+    end    
   end
+
 
 
 end
