@@ -1,0 +1,15 @@
+$('#dialog-modal').html("<%= escape_javascript( render(:partial => "form" ) ) %>");
+$('#dialog-modal').dialog({
+	title: 'Edit Logo',
+	height: 'auto',
+	width: 'auto',
+	modal: true,
+	buttons: {
+		Save: function() {
+			$(this).children("form").submit();
+		},
+		Cancel: function() {
+			$(this).dialog("close");
+		}
+	}
+});

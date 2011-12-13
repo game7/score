@@ -12,6 +12,9 @@ Score::Engine.routes.draw do
     resources :teams, :shallow => true do
       resources :players, :only => [ :new, :create, :edit, :update, :destroy ]
     end
+    resources :teams, :only => [] do
+      resource :logo, :only => [ :edit, :update ]
+    end
     resources :events
     resources :games, :only => [ :new, :create ], :shallow => true do
       resource :game_result, :only => [ :new, :create, :edit, :update, :destroy ]

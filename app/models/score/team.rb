@@ -1,6 +1,15 @@
 module Score
   class Team
     include Mongoid::Document
+    before_save :ensure_record
+    before_save :ensure_logo
+    before_save do |t|
+      update_division_info(self.division) if division_id_changed?
+    end
+    before_validation do |t|
+      t.short_name ||= t.name
+      t.slug = t.name.parameterize if t.name
+    end        
 
     field :name, type: String
     validates :name, :presence => true
@@ -12,11 +21,6 @@ module Score
     validates :slug, :presence => true
 
     field :show_in_standings, type: Boolean, default: true
-
-    before_validation do |t|
-      t.short_name ||= t.name
-      t.slug = t.name.parameterize if t.name
-    end
 
     belongs_to :organization, class_name: "Score::Organization"
     
@@ -35,11 +39,11 @@ module Score
     
     embeds_one :logo, class_name: "Score::Logo", as: :logoable
     
-    before_save :ensure_record
-
-    before_save do |t|
-      update_division_info(self.division) if division_id_changed?
+    def has_logo?
+      logo.present? && logo.image.present? && logo.image.url.present?
     end
+    
+
 
     def update_division_info(d)
       unless d == nil
@@ -73,6 +77,10 @@ module Score
     
       def ensure_record
         self.record ||= Score::TeamRecord.new
+      end
+      
+      def ensure_logo
+        self.logo ||= Score::Logo.new
       end
 
   end

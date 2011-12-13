@@ -55,6 +55,17 @@ module Score
     # def filename
     #   "something.jpg" if original_filename
     # end
+    
+    def crop_and_scale(resize_to = nil)
+      if model.cropping?
+        manipulate! do |img|
+          img = img.crop(model.crop_x.to_i, model.crop_y.to_i, model.crop_h.to_i, model.crop_w.to_i, true)
+          img = img.resize(resize_to, resize_to) if resize_to
+        end
+      else
+        resize_to_limit(resize_to, resize_to)
+      end
+    end    
 
   end
 end
