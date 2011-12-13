@@ -3,6 +3,9 @@
 	$("#dialog-modal").html("<%= escape_javascript( render(:partial => "form") ) %>");
 <% else %>
 	$("#dialog-modal").dialog("close");
+	<% singular = @logoable.class.to_s.demodulize.parameterize %>
+	<% plural = singular.pluralize %>
+  $("#<%= singular %>_<%= @logoable.id %>").replaceWith("<%= escape_javascript( render(:partial => "/score/admin/#{plural}/#{singular}", :object => @logoable) ) %>");		
 	$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
 	$("#flash_notice").show(300);
 <% end %>

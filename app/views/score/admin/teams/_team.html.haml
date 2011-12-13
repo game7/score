@@ -1,6 +1,6 @@
 .team{ :id => "team_#{team.id}", :style => "border: 1px solid #999; padding: 5px; width: 240px; margin: 3px; float: left;" }
   .logo{ :style => "border: 1px solid #999; height: 50px; width: 50px; float: left;" }
-    = image_tag team.logo.image.tiny.url.to_s, :alt => team.name if team.has_logo?
+    = image_tag "#{team.logo.image.tiny.url.to_s}?#{Time.now.to_i}", :alt => team.name if team.has_logo?
   .info{ :style => "float: left; margin-left: 5px;" }
     .name #{team.name}
     .actions
