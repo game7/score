@@ -15,7 +15,7 @@ module Score
 
     before_validation do |t|
       t.short_name ||= t.name
-      t.slug = t.name.parameterize
+      t.slug = t.name.parameterize if t.name
     end
 
     belongs_to :organization, class_name: "Score::Organization"
@@ -32,6 +32,8 @@ module Score
     field :season_slug, type: String
     
     embeds_one :record, class_name: "Score::TeamRecord"
+    
+    embeds_one :logo, class_name: "Score::Logo", as: :logoable
     
     before_save :ensure_record
 

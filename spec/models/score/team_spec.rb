@@ -24,6 +24,8 @@ describe Score::Team do
   it { should have_many(:players) }  
   
   it { should embed_one(:record) }
+  
+  it { should embed_one(:logo) }
 
   context "upon saving" do
     before(:all) do

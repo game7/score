@@ -1,4 +1,5 @@
 Autotest.add_hook :initialize do |at|
-  %w{.git vendor db log system rerun.txt}.each {|exception| at.add_exception(exception)}
+  %w{.git vendor db system rerun.txt}.each {|exception| at.add_exception(exception)}
+  at.add_exception('.log')
 end
 
