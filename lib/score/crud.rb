@@ -47,12 +47,12 @@ module Score
                               
           def new
             @instance = @#{instance_name} = #{class_name}.new
+            session[:partial] = params[:partial] ? params[:partial] : "#{instance_name}"            
             before_render_new
           end
         
           def create
-            @instance = @#{instance_name} = #{class_name}.new(params[:#{instance_name}])
-            session[:partial] = params[:partial] ? params[:partial] : "#{instance_name}"
+            @instance = @#{instance_name} = #{class_name}.new(params[:#{instance_name}])  
             ok = before_create
             return ok unless ok === true
             if @instance.valid? && @instance.save

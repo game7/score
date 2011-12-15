@@ -6,14 +6,18 @@ Score::Engine.routes.draw do
   
   namespace :admin do
     resources :seasons, :shallow => true do
-      resources :divisions
+      resources :divisions do
+        resources :teams do
+          resources :players, :only => [ :new, :create, :edit, :update, :destroy ]
+        end
+      end
     end
     resources :clubs
     resources :organizations
     resources :venues
-    resources :teams, :shallow => true do
-      resources :players, :only => [ :new, :create, :edit, :update, :destroy ]
-    end
+    #resources :teams, :shallow => true, :only => [] do
+    #  resources :players, :only => [ :new, :create, :edit, :update, :destroy ]
+    #end
     resources :teams, :only => [] do
       resource :logo, :only => [ :edit, :update ]
     end

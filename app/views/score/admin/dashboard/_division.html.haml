@@ -4,7 +4,7 @@
     .right
       = link_to 'Edit', edit_admin_division_path(:id => division.id, :partial => 'score/admin/dashboard/division'), :remote => :true
       = " | "
-      = link_to 'Add Team', new_admin_team_path(:season_id => division.season_id, :division_id => division.id, :partial => 'score/admin/dashboard/team'), :remote => :true
+      = link_to 'Add Team', new_admin_division_team_path(:division_id => division.id, :partial => 'score/admin/dashboard/team'), :remote => :true
     .clear
   .teams
     - teams ||= division.teams.asc(:name)

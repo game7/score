@@ -1,14 +1,10 @@
 module Score
   module Admin   
     class TeamsController < ApplicationController
+      before_filter :find_division, :only => [:new, :create]
+      before_filter :get_organizations, :only => [:new, :create, :edit, :update]      
       
       crudify 'score/team'
-      
-      before_filter :find_season, :only => [:index, :new, :create, :edit, :update]
-      before_filter :get_seasons, :only => [:index, :new, :create, :edit, :update]
-      before_filter :get_season_links, :only => [:index]
-      before_filter :get_divisions, :only => [:index, :new, :create, :edit, :update]
-      before_filter :get_organizations, :only => [:new, :create, :edit, :update]
       
       def index
         @teams = Score::Team.for_season(@season)
@@ -20,11 +16,6 @@ module Score
           format.html
         end
       end
-
-      def before_render_new
-        @team.season_id = params[:season_id] if params[:season_id]
-        @team.division_id = params[:division_id] if params[:division_id]
-      end
       
       def show
         @players = @team.players.asc(:last)
@@ -32,21 +23,17 @@ module Score
       
       private
       
-        def find_season
-          @season = params[:season_id] ? Score::Season.find(params[:season_id]) : Score::Season.most_recent
-          @season ||= Score::Season.next
+        def before_create
+          @team.division = @division
+          true
         end
         
-        def get_seasons
-          @seasons = Score::Season.all.desc(:starts_on)
+        def find_division
+          @division = Score::Division.find(params[:division_id])
         end
         
         def get_divisions
           @divisions = @season ? @season.divisions.asc(:name).entries : []
-        end
-        
-        def get_season_links
-          @season_links = Score::Season.asc(:starts_on).each.collect{ |s| [s.name, admin_teams_path(:season_id => s.id)] }
         end
         
         def get_organizations
