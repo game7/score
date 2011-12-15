@@ -3,7 +3,7 @@
 	$("#dialog-modal").html("<%= escape_javascript( render(:partial => "form") ) %>");
 <% else %>
 	$("#dialog-modal").dialog("close");
-	$("#<%= @inflections[:instance] %>_<%= @instance.id %>").replaceWith("<%= escape_javascript( render(:partial => "#{@inflections[:instance]}", :object => @instance) ) %>");	
+	$("#<%= @inflections[:instance] %>_<%= @instance.id %>").replaceWith("<%= escape_javascript( render(:partial => "#{@partial}", :object => @instance) ) %>");	
 	$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
 	$("#flash_notice").show(300);
 <% end %>

@@ -43,6 +43,7 @@ module Score
                                 :only => [:update, :destroy, :edit, :show]
           prepend_before_filter :set_what
           prepend_before_filter :set_inflections
+          before_filter         :set_partial
                               
           def new
             @instance = @#{instance_name} = #{class_name}.new
@@ -51,6 +52,7 @@ module Score
         
           def create
             @instance = @#{instance_name} = #{class_name}.new(params[:#{instance_name}])
+            session[:partial] = params[:partial] ? params[:partial] : "#{instance_name}"
             ok = before_create
             return ok unless ok === true
             if @instance.valid? && @instance.save
@@ -66,6 +68,7 @@ module Score
         
           def edit
             # object gets found by find_#{instance_name} function
+            session[:partial] = params[:partial] ? params[:partial] : "#{instance_name}"            
             before_render_edit
           end
         
@@ -103,6 +106,10 @@ module Score
           
           def set_what
             @what = "#{singular_name}"
+          end
+          
+          def set_partial
+            @partial = session[:partial]
           end
           
           def set_inflections

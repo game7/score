@@ -1,0 +1,12 @@
+.division{ :id => "division_#{division.id}", :style => "margin-top: 3px; width: 480px;" }
+  .header{ :style => "background-color: #ddd; padding: 3px;" } 
+    .left #{division.name} Division
+    .right
+      = link_to 'Edit', edit_admin_division_path(:id => division.id, :partial => 'score/admin/dashboard/division'), :remote => :true
+      = " | "
+      = link_to 'Add Team', new_admin_team_path(:season_id => division.season_id, :division_id => division.id, :partial => 'score/admin/dashboard/team'), :remote => :true
+    .clear
+  .teams
+    - teams ||= division.teams.asc(:name)
+    = render :partial => 'score/admin/dashboard/team', :collection => teams ? teams.select{ |t| t.division_id == division.id } : division.teams.asc(:name)
+  .clear    

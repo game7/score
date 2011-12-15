@@ -3,7 +3,7 @@
 	$("#dialog-modal").html("<%= escape_javascript( render(:partial => "form") ) %>");
 <% else %>
 	$("#dialog-modal").dialog("close");
-	$("#division_<%= @team.division_id %> > .teams").append("<%= escape_javascript( render(:partial => "team", :object => @team) ) %>");	
+	$("#division_<%= @team.division_id %> > .teams").append("<%= escape_javascript( render(:partial => @partial, :object => @team) ) %>");	
 	$("#flash_notice").html("<%= escape_javascript( flash.discard(:notice) ) %>");
 	$("#flash_notice").show(300);
 <% end %>

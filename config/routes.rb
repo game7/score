@@ -1,7 +1,9 @@
 Score::Engine.routes.draw do
 
   resources :standings, :only => [:index]
-
+  
+  match 'admin/dashboard' => 'admin/dashboard#index'
+  
   namespace :admin do
     resources :seasons, :shallow => true do
       resources :divisions

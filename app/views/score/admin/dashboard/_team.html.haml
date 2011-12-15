@@ -1,0 +1,9 @@
+.team{ :id => "team_#{team.id}", :style => "border-bottom: 1px solid #999; width: 470px; margin: 3px; padding: 2px;" }
+  .logo{ :style => "border: 1px solid #999; height: 25px; width: 25px; float: left; margin-right: 2px;" }
+    = image_tag team.logo.image.micro.url if team.has_logo?
+  .name{ :style => "float: left; line-height: 27px; margin-left: 2px;" }= link_to team.name, [:admin, team]
+  .actions{ :style => "float: right; line-height: 27px; margin-right: 2px;" }
+    = link_to 'Edit', edit_admin_team_path(:id => team.id, :partial => 'score/admin/dashboard/team'), :remote => :true
+    = " | "
+    = link_to 'Delete', [:admin, team], :confirm => 'Are you sure?', :method => :delete, :remote => :true
+  .clear

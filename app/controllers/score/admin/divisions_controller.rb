@@ -5,6 +5,13 @@ module Score
       crudify 'score/division'
 
       before_filter :find_season
+      around_filter :check_partial
+
+      def check_partial
+        puts "partial: #{params[:partial]}"
+        yield
+        puts "session: #{session[:partial]}"
+      end      
       
       def index
         @divisions = @season.divisions.asc(:name)

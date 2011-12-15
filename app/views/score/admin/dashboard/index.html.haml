@@ -1,0 +1,6 @@
+%h1 Dashboard
+
+Season: #{select("season", :id, @season_links, {:selected => request.fullpath }, { :class => "redirect_to" })}
+%div#divisions
+  = render :partial => 'division', :collection => @divisions, :locals => { :teams => @teams }
+%br/
